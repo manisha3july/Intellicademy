@@ -1,0 +1,18 @@
+
+.hero_container {
+    background-image:url(../assests/banner.jpg);
+    width:100%;
+    min-height:100vh;
+    background-size:cover;
+}
+.logo-img {
+    width:200px;
+}
+
+header .nav li a {
+ color:#fff;
+}
+
+header .nav li .dropdown-item {
+    color:#000;
+}
