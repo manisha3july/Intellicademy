@@ -1,0 +1,43 @@
+.aiConcept{
+   top: 60px; /* Adjust based on header height */
+   
+   overflow-y: auto; /* Enables internal scrolling */
+}
+.conceptBox {
+   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3);
+   border-left:solid 4px #6790E8;
+   padding:30px;
+}
+.list {
+   list-style:none;
+   padding-left:0;
+}
+.list li {
+   margin-bottom:10px;
+}
+.blue_btn {
+   margin-bottom: -20px;
+   float: right;
+}
+.aiConcept {
+   position:static;
+   top:100px;
+}
+.aiconceptOuter{
+   background-color:#F0F4FD;
+   padding:50px 0; 
+}
+.aiconceptOuter:nth-child(even){
+   background-color:#fff;
+}
+
+.aiconceptOuter .conceptBox {
+   background-color:#fff;
+}
+
+.aiconceptOuter:nth-child(even) .conceptBox{
+   background-color:#F0F4FD;
+}
+.aiconceptOuter:nth-child(even) .aiconceptInner {
+   flex-direction:row-reverse;
+}

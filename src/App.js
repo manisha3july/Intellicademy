@@ -6,6 +6,9 @@ import Product from "./components/Product";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Hero from "./components/Hero"
+import About from "./components/About"
+import AboutCard from "./components/AboutCard.js";
+import AIconcepts from "./components/AIconcepts.js";
 
 function App() {
   return (
@@ -21,9 +24,12 @@ function App() {
     </Router> */}
     <Header/>
     <Hero />
+    <About />
+    <AboutCard />
+    <AIconcepts />
 
 
-      <div className="container">
+      {/* <div className="container">
         <h1>This is Appp</h1>
         <Customer CustomerName="Manisha" />
         <Customer CustomerName="Rashmi" />
@@ -31,7 +37,7 @@ function App() {
         <br />
         <Product productName="Laptop" />
         
-      </div>
+      </div> */}
     </>
   );
 }

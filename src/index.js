@@ -10,6 +10,7 @@ import Customer from "./components/Customer";
 import Home from "./components/Home";
 import StudentFarm from './components/StudentFarm'
 import reportWebVitals from "./reportWebVitals";
+import "@fortawesome/react-fontawesome";
 
 
 

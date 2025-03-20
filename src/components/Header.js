@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assests/logo-1.png"
+import logo from "../assets/logo-1.png"
 const Header = () => {
   return (
     <header className=" text-white fixed-top">
@@ -26,12 +26,11 @@ const Header = () => {
             <li><a href="#" className="nav-link px-2 ">Contact Us</a></li>
           </ul>
 
-          <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input type="search" className="form-control form-control-dark" placeholder="Search..." aria-label="Search" />
-          </form>
+         
 
           <div className="text-end">
             <button type="button" className="btn btn-outline-light me-2">Login</button>
+            <button type="button" className="btn btn-outline-light me-2">Sign up</button>
           </div>
         </div>
       </div>
