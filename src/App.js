@@ -5,11 +5,13 @@ import Customer from "./components/Customer";
 import Product from "./components/Product";
 import Home from "./components/Home";
 import Header from "./components/Header";
-import Hero from "./components/Hero"
-import About from "./components/About"
+import Hero from "./components/Hero";
+import About from "./components/About";
 import AboutCard from "./components/AboutCard.js";
 import AIconcepts from "./components/AIconcepts.js";
-
+import LatestPost from "./components/LatestPost.js";
+import Contact from "./components/Contact.js";
+import Footer from "./components/Footer.js";
 function App() {
   return (
     <>
@@ -27,6 +29,9 @@ function App() {
     <About />
     <AboutCard />
     <AIconcepts />
+    <LatestPost />
+    <Contact/>
+    <Footer />
 
 
       {/* <div className="container">

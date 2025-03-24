@@ -1,0 +1,29 @@
+.contact-container {
+    padding:50px 0;
+}
+.contact-list {
+    margin-bottom:30px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.contact-list li span {
+    width: 50px;
+    min-width:50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.175);
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6790e8;
+    font-size: 21px;
+}
+.contact-list li p {
+    font-size:16px;
+    line-height:18px;
+}
