@@ -22,9 +22,9 @@ function AboutCard() {
             <FontAwesomeIcon icon={faBrain} size="4x"
               className="blueColor mb-4" />
               
-              <h3 className=" mb-2">100+</h3>
-              <h4 className=" mb-2">AI Courses  </h4>
-              <p className="text-center">Covering Machine Learning, Deep Learning, NLP, and more.</p>
+              <h3 className=" mb-2">50+</h3>
+              <h4 className=" mb-2">Industry Experts </h4>
+              <p className="text-center">Learn from AI professionals and leaders.</p>
           </div>
         </div>
         <div className="col-sm-3 ">
@@ -32,9 +32,9 @@ function AboutCard() {
          
             <FontAwesomeIcon icon={faBookOpen} size="4x"
               className="blueColor mb-4" />
-              <h3 className=" mb-2">100+</h3>
-              <h4 className=" mb-2">AI Courses  </h4>
-              <p className="text-center">Covering Machine Learning, Deep Learning, NLP, and more.</p>
+              <h3 className=" mb-2">95%</h3>
+              <h4 className=" mb-2">Success Rate  </h4>
+              <p className="text-center">Learners upskill and advance in their careers.</p>
           </div>
         </div>
       </div>

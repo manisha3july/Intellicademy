@@ -5,6 +5,8 @@ import "./contact.css";
 import { faPhone, faEnvelope, faLocationDot,} from "@fortawesome/free-solid-svg-icons";
 function Contact() {
 
+  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -25,9 +27,11 @@ function Contact() {
       alert('please fill your email');
     }else if(formData.mobileNumber == ''){
       alert('please fill your number');
-    }else{
-      alert('Event Fired!');
-      // Handle form submission logic here
+    }else if(formData.message == ''){
+      alert('please fill your message');
+    }
+    else{
+      alert('Thank You');
     }
   };
 
@@ -83,7 +87,7 @@ const headingS = {
                       placeholder="Enter your name"
                       id="name"
                       onChange={handleChange}
-                      required
+                  
                     />
                   </div>
                   <div className="mb-3">
@@ -96,7 +100,7 @@ const headingS = {
                       placeholder="Enter your email"
                       id="email"
                       onChange={handleChange}
-                      required
+                  
                     />
                   </div>
                   <div className="mb-3">
@@ -109,7 +113,7 @@ const headingS = {
                       placeholder="Enter your mobile number"
                       id="mobileNumber"
                       onChange={handleChange}
-                      required
+                  
                     />
                   </div>
 
@@ -123,7 +127,7 @@ const headingS = {
                       name="message"
                       onChange={handleChange}
                       rows="4"
-                      required
+                      
                     ></textarea>
                   </div>
                   <button type="submit " className="btn blue_btn w-100 py-2">

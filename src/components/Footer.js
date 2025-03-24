@@ -1,29 +1,40 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareFacebook, faSquareTwitter, faLinkedin, faInstagram, faYoutube} from '@fortawesome/free-brands-svg-icons';
-
 import "./contact.css";
-// import {} from "@fortawesome/free-solid-svg-icons";
 import "./Footer.css"; 
+import logo  from "../assets/logo-1.png"; 
+
+
 
 function Footer() {
+
+  const mystyle = {
+    fontSize: '18px',
+   
+  }
+  const logoStyle = {
+    width: '200px',
+   
+  }
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-top">
+        <div className="footer-top row">
           {/* Company Info */}
-          <div className="footer-section">
-            <h4 className="blueColor">About Intellicademy</h4>
+          <div className="col-md-4">
+            <img src={logo} style={logoStyle} />
+            <h4 className="blueColor" style={mystyle}>About Intellicademy</h4>
             <p>
-              AI Concepts provides cutting-edge courses on AI, Machine Learning,
+              Intellicademy provides cutting-edge courses on AI, Machine Learning,
               Deep Learning, and Data Science to help professionals and
               businesses innovate and grow.
             </p>
           </div>
 
           {/* Navigation Links */}
-          <div className="footer-section">
-            <h4 className="blueColor">Explore</h4>
+          <div className="col-md-2">
+            <h4 className="blueColor" style={mystyle} >Explore</h4>
             <ul>
               <li><a href="#">About Us</a></li>
               <li><a href="#">Courses</a></li>
@@ -34,8 +45,8 @@ function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="footer-section">
-            <h4 className="blueColor">Quick Links</h4>
+          <div className="col-md-2">
+            <h4 className="blueColor" style={mystyle}>Quick Links</h4>
             <ul>
               <li><a href="#">Privacy Policy</a></li>
               <li><a href="#">Terms of Service</a></li>
@@ -46,8 +57,8 @@ function Footer() {
           </div>
 
           {/* Newsletter Subscription */}
-          <div className="footer-section newsletter">
-            <h4>Subscribe to Our Newsletter</h4>
+          <div className="col-md-4 newsletter">
+            <h4 style={mystyle}> Subscribe to Our Newsletter</h4>
             <p>Stay updated with the latest AI trends, courses, and insights.</p>
             <form>
               <input type="email" placeholder="Enter your email" required />
@@ -75,7 +86,7 @@ function Footer() {
             <FontAwesomeIcon icon={faYoutube} />
             </a>
           </div>
-          <p>© 2024 AI Concepts. All Rights Reserved.</p>
+          <p>© 2024 Intellicademy.  All Rights Reserved.</p>
         </div>
       </div>
     </footer>

@@ -1,0 +1,24 @@
+header  {
+  z-index:99999999;
+}
+header .headertop  {
+  width:100%;
+}
+header .nav li .dropdown-item {
+  color:#000;
+}
+
+.blueHeaderBtn {
+  background-color: #6790E8;
+  color: #fff;
+}
+
+.navbar.bg-transparent {
+  transition: background-color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: none !important;
+}
+
+.navbar.bg-white {
+  transition: background-color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Light border when scrolled */
+}
