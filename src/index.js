@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "@popperjs/core"; // ✅ Explicitly import Popper.js
 import "./index.css";
 import App from "./App";
 import About from "./components/About";

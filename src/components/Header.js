@@ -1,19 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo-1.png";
 import logodark from "../assets/logo.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import "@popperjs/core";
 import "./header.css";
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null); // ✅ Ref for dropdown
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 150);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // ✅ Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   const isSignupPage = location.pathname === "/signup";
 
@@ -40,32 +61,20 @@ const Header = () => {
                 About
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <a
+            {/* ✅ Dropdown Menu with Outside Click Handling */}
+            <li className="nav-item dropdown" ref={dropdownRef}>
+              <button
                 className={`nav-link dropdown-toggle ${isSignupPage || isScrolled ? "text-black" : "text-white"}`}
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-expanded="false"
+                onClick={toggleDropdown}
               >
                 AI Concepts
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#">Machine Learning</a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">Deep Learning</a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">Generative AI</a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">Data Analytics</a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">Neural Networks</a>
-                </li>
+              </button>
+              <ul className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
+                <li><a className="dropdown-item" href="#">Machine Learning</a></li>
+                <li><a className="dropdown-item" href="#">Deep Learning</a></li>
+                <li><a className="dropdown-item" href="#">Generative AI</a></li>
+                <li><a className="dropdown-item" href="#">Data Analytics</a></li>
+                <li><a className="dropdown-item" href="#">Neural Networks</a></li>
               </ul>
             </li>
             <li>
@@ -81,12 +90,16 @@ const Header = () => {
           </ul>
 
           <div className="text-end">
-            <button
-              type="button"
-              className={`btn me-2 ${isSignupPage || isScrolled ? "blueHeaderBtn" : "btn-outline-light"}`}
-            >
-              Login
-            </button>
+            {!isLoggedIn && (
+              <button
+                type="button"
+                className={`btn me-2 ${isSignupPage || isScrolled ? "blueHeaderBtn" : "btn-outline-light"}`}
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Login
+              </button>
+            )}
             <button
               type="button"
               className={`btn me-2 ${isSignupPage || isScrolled ? "blueHeaderBtn" : "btn-outline-light"}`}
