@@ -7,7 +7,7 @@ import AboutCard from "./components/AboutCard.js";
 import AIconcepts from "./components/AIconcepts.js";
 import LatestPost from "./components/LatestPost.js";
 import Contact from "./components/Contact.js";
-import Login from "./components/Login.js";
+
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
     <LatestPost />
     <Contact/>
 
-    <Login />
+
     </>
   );
 }
