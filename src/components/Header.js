@@ -34,19 +34,19 @@ const Header = ({ handleShow }) => {
   };
 
   const isSignupPage = location.pathname === "/signup";
-
+  const isLandingPage = location.pathname === "/";
   return (
     <Navbar
       expand="lg"
       fixed="top"
-      className={`navbar ${isSignupPage ? "position-relative bg-white text-black" : ""}
+      className={`navbar ${isLandingPage ? "fixed-top" : "position-relative bg-white text-black"}
       ${isScrolled ? "navbar-light bg-white text-black animate" : "bg-transparent text-white"}`}
     >
       <Container>
         {/* Logo on the left */}
         <Navbar.Brand href="/">
           <img
-            src={isSignupPage || isScrolled ? logodark : logo}
+            src={isLandingPage && !isScrolled ?  logo : logodark}
             className="logo-img"
             alt="Company Logo"
           />
@@ -57,10 +57,10 @@ const Header = ({ handleShow }) => {
 
         <Navbar.Collapse id="navbar-nav" className="justify-content-center">
           <Nav className="align-items-center">
-            <Nav.Link href="#" className={isSignupPage || isScrolled ? "text-black" : "text-white"}>
+            <Nav.Link  href="" className={isLandingPage && !isScrolled ? "text-white" : "text-black"} >
               Home
             </Nav.Link>
-            <Nav.Link href="#" className={isSignupPage || isScrolled ? "text-black" : "text-white"}>
+            <Nav.Link href="#" className={isLandingPage && !isScrolled ? "text-white" : "text-black"}>
               About
             </Nav.Link>
 
@@ -68,7 +68,7 @@ const Header = ({ handleShow }) => {
             <Dropdown ref={dropdownRef} show={dropdownOpen} onToggle={toggleDropdown}>
               <Dropdown.Toggle
                 variant="link"
-                className={`nav-link dropdown-toggle ${isSignupPage || isScrolled ? "text-black" : "text-white"}`}
+                className={`nav-link dropdown-toggle ${isLandingPage  && !isScrolled ? "text-white" : "text-black"}`}
               >
                 AI Concepts
               </Dropdown.Toggle>
@@ -81,10 +81,10 @@ const Header = ({ handleShow }) => {
               </Dropdown.Menu>
             </Dropdown>
 
-            <Nav.Link href="#" className={isSignupPage || isScrolled ? "text-black" : "text-white"}>
+            <Nav.Link href="#" className={isLandingPage  && !isScrolled ? "text-white" : "text-black"}>
               Blog
             </Nav.Link>
-            <Nav.Link href="#" className={isSignupPage || isScrolled ? "text-black" : "text-white"}>
+            <Nav.Link href="#" className={isLandingPage  && !isScrolled ? "text-white" : "text-black"}>
               Contact Us
             </Nav.Link>
           </Nav>
@@ -94,7 +94,7 @@ const Header = ({ handleShow }) => {
         <div className="d-flex align-items-center">
           {!isLoggedIn && (
             <Button
-              variant={isSignupPage || isScrolled ? "primary" : "outline-light"}
+              variant={isLandingPage && !isScrolled ? "outline-light" : " blueHeaderBtn"}
               className="me-2"
               onClick={handleShow}
             >
@@ -102,7 +102,7 @@ const Header = ({ handleShow }) => {
             </Button>
           )}
           <Button
-            variant={isSignupPage || isScrolled ? "primary" : "outline-light"}
+            variant={isLandingPage && !isScrolled ? "outline-light" : " blueHeaderBtn"}
             onClick={() => navigate("/signup")}
           >
             Sign up

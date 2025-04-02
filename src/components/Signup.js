@@ -165,7 +165,7 @@ const Signup = () => {
                     {errors.city && <div className="invalid-feedback">{errors.city}</div>}
                   </div>
 </div>
-                  <button type="submit" className="btn btn-primary w-100">
+                  <button type="submit" className="btn blue_btn w-100">
                     Sign Up
                   </button>
                 </form>

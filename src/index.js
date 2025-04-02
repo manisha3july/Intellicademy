@@ -12,6 +12,7 @@ import LatestPost from "./components/LatestPost";
 import Contact from "./components/Contact";
 import Signup from "./components/Signup";
 import Layout from "./components/Layout"; // Import Layout
+import Home from "./components/Home"
 import reportWebVitals from "./reportWebVitals";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +27,7 @@ root.render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
+          <Route path="Home" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="aIconcepts" element={<AIconcepts />} />

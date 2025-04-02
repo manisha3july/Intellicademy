@@ -31,9 +31,7 @@ function About() {
             <h3>Our Mission</h3>
           </div>
           <p>
-            To empower learners worldwide with AI-driven education, bridging the
-            gap between knowledge and real-world applications while keeping up
-            with the rapidly evolving AI landscape.
+          To empower learners worldwide with AI-driven education, bridging the gap between knowledge and real-world applications while keeping up with the rapidly evolving AI landscape. We strive to make AI education accessible, engaging, and practical, fostering innovation, critical thinking, and problem-solving skills. Our mission is to equip individuals with the tools and knowledge needed to thrive in an AI-powered future, ensuring inclusivity, adaptability, and continuous learning in an ever-changing digital world.
           </p>
         </div>
       </div>

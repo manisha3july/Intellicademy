@@ -11,6 +11,11 @@ header .nav li .dropdown-item {
 .blueHeaderBtn {
   background-color: #6790E8;
   color: #fff;
+  transition:all 0.3 ease-in;
+}
+.blueHeaderBtn:hover {
+  border:solid 1px #6790E8;
+  color:#6790E8;
 }
 
 .navbar.bg-transparent {
