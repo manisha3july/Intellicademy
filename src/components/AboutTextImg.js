@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AboutImg from "../assets/AI.jpg";
 import { faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
 import "./about.css";
-function About() {
+function AboutTextImg() {
   return (
     <section className="About-section p-5">
       <div className="row d-flex justify-content-around">
@@ -39,4 +39,4 @@ function About() {
   );
 }
 
-export default About;
+export default AboutTextImg;

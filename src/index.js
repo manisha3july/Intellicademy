@@ -6,7 +6,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "@popperjs/core"; // ✅ Explicitly import Popper.js
 import "./index.css";
 import App from "./App";
-import About from "./components/About";
+import AboutTextImg from "./components/AboutTextImg";
 import AIconcepts from "./components/AIconcepts";
 import LatestPost from "./components/LatestPost";
 import Contact from "./components/Contact";
@@ -28,7 +28,7 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
           <Route path="Home" element={<Home />} />
-          <Route path="about" element={<About />} />
+          <Route path="AboutTextImg" element={<AboutTextImg />} />
           <Route path="contact" element={<Contact />} />
           <Route path="aIconcepts" element={<AIconcepts />} />
           <Route path="latestPost" element={<LatestPost />} />

@@ -57,11 +57,11 @@ function AboutCard() {
     <section ref={sectionRef} className="About-section p-5">
       <div className="row d-flex justify-content-around">
         {counters.map((counter, index) => (
-          <div className="col-sm-3" key={index}>
-            <div className="about-card lightBlueBg d-flex align-items-center justify-content-center flex-column p-4">
+          <div className="col-lg-3 col-sm mb-3" key={index}>
+            <div className="about-card lightBlueBg d-flex align-items-center justify-content-center flex-column p-4 ">
               <FontAwesomeIcon icon={counter.icon} size="4x" className="blueColor mb-4" />
               <h3 className="mb-2">{counts[index]}+</h3>
-              <h4 className="mb-2">{counter.title}</h4>
+              <h4 className="mb-2 text-center">{counter.title}</h4>
               <p className="text-center">{counter.text}</p>
             </div>
           </div>
