@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./signup.css"; // Import custom styles
+import Section from "./Section";
 
 const countryCityData = {
   USA: ["New York", "Los Angeles", "Chicago", "Houston"],
@@ -63,7 +64,7 @@ const Signup = () => {
   };
 
   return (
-    <section className="signup-section">
+    <Section className="signup-section">
       <div className="container">
         <div className="signup-container">
           {submitted ? (
@@ -174,7 +175,7 @@ const Signup = () => {
           )}
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

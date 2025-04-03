@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhone,
+  faEnvelope,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
+import Section from "./Section";
 import "./contact.css";
 
 function Contact() {
@@ -38,7 +43,7 @@ function Contact() {
   };
 
   return (
-    <section className="contact-container lightBlueBg">
+    <Section className=" contact-container lightBlueBg">
       <div className="container">
         <div className="row">
           {/* Contact Details Section */}
@@ -63,7 +68,10 @@ function Contact() {
                 <span className="icon">
                   <FontAwesomeIcon icon={faLocationDot} />
                 </span>
-                <p>Akshya Nagar 1st Block 1st Cross, Rammurthy Nagar, Bangalore-560016</p>
+                <p>
+                  Akshya Nagar 1st Block 1st Cross, Rammurthy Nagar,
+                  Bangalore-560016
+                </p>
               </li>
             </ul>
             <iframe
@@ -132,7 +140,7 @@ function Contact() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 

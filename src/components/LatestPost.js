@@ -6,6 +6,7 @@ import "./LatestPost.css";
 import BlogImg from "../assets/blog.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Section from './Section';
 
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -45,7 +46,7 @@ function LatestPost() {
     };
 
   return (
-    <section className='latestPost'>
+    <Section className='latestPost'>
       <div className='container'>
           <div className='row'>
             <div className='col-sm-12'>
@@ -94,7 +95,7 @@ function LatestPost() {
     
           
         </div>
-    </section>
+    </Section>
   );
 }
 

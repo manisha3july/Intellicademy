@@ -2,10 +2,11 @@ import React from "react";
 
 import "./AIconcepts.css";
 import aiConceptsData  from "./utils/aiConceptData";
+import Section from "./Section";
 
 function AIconcepts() {
   return (
-    <section className="aiConcept">
+    <Section className="aiConcept">
       {aiConceptsData.map((concept, index) => (
         <div className="aiconceptOuter" key={index}>
           <div className="container">
@@ -31,7 +32,7 @@ function AIconcepts() {
           </div>
         </div>
       ))}
-    </section>
+    </Section>
   );
 }
 

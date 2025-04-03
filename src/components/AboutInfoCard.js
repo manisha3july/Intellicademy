@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./about.css";
+import Section from "./Section.js";
 import counters from './utils/aboutData.js'
 
 function AboutCard() {
@@ -54,7 +55,7 @@ function AboutCard() {
   }, [isVisible]);
 
   return (
-    <section ref={sectionRef} className="About-section p-5">
+    <Section ref={sectionRef} className="About-section p-5">
       <div className="row d-flex justify-content-around">
         {counters.map((counter, index) => (
           <div className="col-lg-3 col-sm mb-3" key={index}>
@@ -67,7 +68,7 @@ function AboutCard() {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 

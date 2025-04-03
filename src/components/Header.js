@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import logo from "../assets/logo-1.png";
 import logodark from "../assets/logo.png";
 import { Navbar, Nav, Button, Container, Dropdown } from "react-bootstrap";
 import "./header.css";
+
 
 const Header = ({ handleShow }) => {
   const location = useLocation();
@@ -60,7 +61,7 @@ const Header = ({ handleShow }) => {
             <Nav.Link  href="" className={isLandingPage && !isScrolled ? "text-white" : "text-black"} >
               Home
             </Nav.Link>
-            <Nav.Link href="#" className={isLandingPage && !isScrolled ? "text-white" : "text-black"}>
+            <Nav.Link as={Link} to="/about"  className={isLandingPage && !isScrolled ? "text-white" : "text-black"} >
               About
             </Nav.Link>
 
