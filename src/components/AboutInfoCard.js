@@ -2,18 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./about.css";
 import Section from "./Section.js";
-import counters from './utils/aboutData.js'
+import counters from './utils/aboutData.js';
 
 function AboutCard() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
-
   const [counts, setCounts] = useState(counters.map(() => 0));
 
   useEffect(() => {
+   
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
+      (counts) => {
+        if (counts[0].isIntersecting) {
+          console.log(counts)
           setIsVisible(true);
         }
       },
@@ -33,24 +34,31 @@ function AboutCard() {
 
   useEffect(() => {
     if (isVisible) {
-      counters.forEach((counter, index) => {
+      const duration = 2000; // 2 seconds
+      const steps = 50; // Number of animation steps
+      const stepTime = duration / steps;
+
+      const intervals = counters.map((counter, index) => {
         let start = 0;
         const end = counter.target;
-        const duration = 2000; // Animation duration (2 seconds)
-        const stepTime = Math.abs(Math.floor(duration / end));
+        const increment = Math.ceil(end / steps);
 
-        const timer = setInterval(() => {
+        return setInterval(() => {
           setCounts((prevCounts) => {
             const newCounts = [...prevCounts];
             if (newCounts[index] < end) {
-              newCounts[index] += 1;
+              newCounts[index] = Math.min(newCounts[index] + increment, end);
             } else {
-              clearInterval(timer);
+              clearInterval(intervals[index]);
             }
             return newCounts;
           });
         }, stepTime);
       });
+
+      return () => {
+        intervals.forEach(clearInterval);
+      };
     }
   }, [isVisible]);
 
@@ -59,7 +67,7 @@ function AboutCard() {
       <div className="row d-flex justify-content-around">
         {counters.map((counter, index) => (
           <div className="col-lg-3 col-sm mb-3" key={index}>
-            <div className="about-card lightBlueBg d-flex align-items-center justify-content-center flex-column p-4 ">
+            <div className="about-card lightBlueBg d-flex align-items-center justify-content-center flex-column p-4">
               <FontAwesomeIcon icon={counter.icon} size="4x" className="blueColor mb-4" />
               <h3 className="mb-2">{counts[index]}+</h3>
               <h4 className="mb-2 text-center">{counter.title}</h4>

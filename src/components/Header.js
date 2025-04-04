@@ -82,7 +82,7 @@ const Header = ({ handleShow }) => {
               </Dropdown.Menu>
             </Dropdown>
 
-            <Nav.Link href="#" className={isLandingPage  && !isScrolled ? "text-white" : "text-black"}>
+            <Nav.Link as={Link} to="/blog"  className={isLandingPage  && !isScrolled ? "text-white" : "text-black"}>
               Blog
             </Nav.Link>
             <Nav.Link href="#" className={isLandingPage  && !isScrolled ? "text-white" : "text-black"}>
