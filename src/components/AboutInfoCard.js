@@ -12,9 +12,9 @@ function AboutCard() {
   useEffect(() => {
    
     const observer = new IntersectionObserver(
-      (counts) => {
-        if (counts[0].isIntersecting) {
-          console.log(counts)
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          console.log(entries)
           setIsVisible(true);
         }
       },

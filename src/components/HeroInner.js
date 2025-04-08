@@ -3,7 +3,7 @@ import "./Hero.css";
 import Section from "./Section";
 import { motion } from "framer-motion";
 
-function HeroInner({ bgimage }) {
+function HeroInner({ bgimage, title }) {
   // Destructure 'image' prop
 
   const backgroundImg = {
@@ -26,7 +26,7 @@ function HeroInner({ bgimage }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }} className="title_box">
           <h1>
-            ABOUT US
+          {title}
           </h1>
           </motion.div>
         </div>

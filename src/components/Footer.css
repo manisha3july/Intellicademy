@@ -6,11 +6,6 @@
     line-height:18px;
   }
   
-  .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
-  }
   
   .footer-top {
     display: flex;

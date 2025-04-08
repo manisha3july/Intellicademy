@@ -48,3 +48,10 @@
   .title_box h1 {
     margin-bottom:0;
   }
+
+  h1 {
+    font-size: 36px;
+    line-height: 38px;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
