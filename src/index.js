@@ -14,6 +14,7 @@ import Signup from "./components/Signup";
 import Layout from "./components/Layout"; // Import Layout
 import Home from "./components/Home"
 import Blog from "./components/Blog";
+import AdminPage from './components/AdminPage';
 import reportWebVitals from "./reportWebVitals";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -34,6 +35,7 @@ root.render(
           <Route path="AIconcepts" element={<AIconcepts />} />
           <Route path="Blog" element={<Blog />} />
           <Route path="Signup" element={<Signup />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
       </Routes>
     </Router>

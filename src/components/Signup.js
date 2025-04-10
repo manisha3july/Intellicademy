@@ -1,34 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./signup.css"; // Import custom styles
 import Section from "./Section";
+import axios from "axios";
+import AdminPage from './AdminPage'
+import { useNavigate } from "react-router-dom";
 
-const countryCityData = {
-  USA: ["New York", "Los Angeles", "Chicago", "Houston"],
-  Canada: ["Toronto", "Vancouver", "Montreal", "Calgary"],
-  UK: ["London", "Manchester", "Birmingham", "Glasgow"],
-  India: ["Mumbai", "Delhi", "Bangalore", "Hyderabad"],
-};
+const UserType = ['Admin', 'Faculty', 'Student'];
 
 const Signup = () => {
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
     country: "",
-    city: "",
+    userType: "",
   });
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get('http://localhost:3006/users');
+      console.log(res.data);
+      const submitData = await axios.post("http://localhost:3006/users", formData);
+      alert(`Thank you, ${formData.name}! Your info has been submitted.`);
+      navigate("/admin"); // This will route to AdminPage
+    } catch (error) {
+      alert('Data not loaded');
+    }
+  };
 
   const handleChange = (e) => {
+    
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
-    if (name === "country") {
-      setFormData({ ...formData, country: value, city: "" });
-    }
   };
 
   const validateForm = () => {
@@ -41,7 +50,7 @@ const Signup = () => {
     if (!formData.confirmPassword) errors.confirmPassword = "Please confirm your password";
     else if (formData.password !== formData.confirmPassword) errors.confirmPassword = "Passwords do not match";
     if (!formData.country) errors.country = "Country is required";
-    if (!formData.city) errors.city = "City is required";
+    if (!formData.userType) errors.userType = "User type is required";
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -49,27 +58,33 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+  
+
     if (validateForm()) {
       setSubmitted(true);
+      fetchData()
       console.log("Form Submitted", formData);
+     
       setFormData({
         name: "",
         email: "",
         password: "",
         confirmPassword: "",
         country: "",
-        city: "",
+        userType: "",
       });
     }
   };
 
   return (
     <Section className="signup-section">
+      
       <div className="container">
-        <div className="signup-container">
-          {submitted ? (
-            <div className="alert alert-success text-center">🎉 Sign-up successful!</div>
-          ) : (
+    
+      
+           
+      <div className="signup-container">
             <div className="card signup-card">
               <div className="card-body">
                 <h2 className="text-center mb-4">Create an Account</h2>
@@ -99,81 +114,76 @@ const Signup = () => {
                     />
                     {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                   </div>
-                  <div className='row'>
-                  <div className="col-sm-6  mb-3">
-                    <label className="form-label">Password</label>
-                    <input
-                      type="password"
-                      name="password"
-                      className={`form-control ${errors.password ? "is-invalid" : ""}`}
-                      value={formData.password}
-                      onChange={handleChange}
-                      placeholder="Enter password"
-                    />
-                    {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+
+                  <div className="row">
+                    <div className="col-sm-6 mb-3">
+                      <label className="form-label">Password</label>
+                      <input
+                        type="password"
+                        name="password"
+                        className={`form-control ${errors.password ? "is-invalid" : ""}`}
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="Enter password"
+                      />
+                      {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+                    </div>
+
+                    <div className="col-sm-6 mb-3">
+                      <label className="form-label">Confirm Password</label>
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        placeholder="Confirm password"
+                      />
+                      {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
+                    </div>
                   </div>
 
-                  <div className="col-sm-6 mb-3">
-                    <label className="form-label">Confirm Password</label>
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      placeholder="Confirm password"
-                    />
-                    {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
-                  </div>
-                  </div>
-                  <div className='row'>
+                  <div className="row">
+                    <div className="col-sm-6 mb-3">
+                      <label className="form-label">Country</label>
+                      <input
+                        type="text"
+                        name="country"
+                        className={`form-control ${errors.country ? "is-invalid" : ""}`}
+                        value={formData.country}
+                        onChange={handleChange}
+                        placeholder="Enter your country"
+                      />
+                      {errors.country && <div className="invalid-feedback">{errors.country}</div>}
+                    </div>
 
-                  <div className="col-sm-6 mb-3">
-                    <label className="form-label">Country</label>
-                    <select
-                      name="country"
-                      className={`form-control ${errors.country ? "is-invalid" : ""}`}
-                      value={formData.country}
-                      onChange={handleChange}
-                    >
-                      <option value="">Select Country</option>
-                      {Object.keys(countryCityData).map((country) => (
-                        <option key={country} value={country}>
-                          {country}
-                        </option>
-                      ))}
-                    </select>
-                    {errors.country && <div className="invalid-feedback">{errors.country}</div>}
-                  </div>
-
-                  <div className="col-sm-6  mb-3">
-                    <label className="form-label">City</label>
-                    <select
-                      name="city"
-                      className={`form-control ${errors.city ? "is-invalid" : ""}`}
-                      value={formData.city}
-                      onChange={handleChange}
-                      disabled={!formData.country}
-                    >
-                      <option value="">Select City</option>
-                      {formData.country &&
-                        countryCityData[formData.country].map((city) => (
-                          <option key={city} value={city}>
-                            {city}
+                    <div className="col-sm-6 mb-3">
+                      <label className="form-label">User Type</label>
+                      <select
+                        name="userType"
+                        className={`form-control ${errors.userType ? "is-invalid" : ""}`}
+                        value={formData.userType}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select User Type</option>
+                        {UserType.map((type) => (
+                          <option key={type} value={type}>
+                            {type}
                           </option>
                         ))}
-                    </select>
-                    {errors.city && <div className="invalid-feedback">{errors.city}</div>}
+                      </select>
+                      {errors.userType && <div className="invalid-feedback">{errors.userType}</div>}
+                    </div>
                   </div>
-</div>
+
                   <button type="submit" className="btn blue_btn w-100">
                     Sign Up
                   </button>
                 </form>
               </div>
             </div>
-          )}
-        </div>
+            </div>
+        
       </div>
     </Section>
   );

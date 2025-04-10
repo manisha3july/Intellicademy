@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "16ba",
+      "name": "Bah Agrawal",
+      "email": "manisha3july@gmail.com",
+      "password": "B123456",
+      "confirmPassword": "B123456",
+      "country": "India",
+      "userType": "Admin"
+    }
+  ]
+}

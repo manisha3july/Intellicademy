@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";  // Ensure Bootstrap CSS is included
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap CSS is included
 
 function Login({ show, handleClose }) {
   const [logData, setLogData] = useState({
@@ -21,6 +21,7 @@ function Login({ show, handleClose }) {
     let errors = {};
     if (!logData.name.trim()) errors.name = "Username is required";
     if (!logData.password.trim()) errors.password = "Password is required";
+    if (!logData.userType) errors.userType = "Please select a user type";
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -31,7 +32,7 @@ function Login({ show, handleClose }) {
       setSuccessMessage(`Thank you for logging in, ${logData.name}!`);
       setTimeout(() => {
         setSuccessMessage("");
-        setLogData({ name: "", email: "", password: "" });
+        setLogData({ name: "", email: "", password: "", userType: ""});
         handleClose(); // Close modal after success
       }, 2000);
     }
@@ -77,6 +78,23 @@ function Login({ show, handleClose }) {
             />
             <Form.Control.Feedback type="invalid">
               {errors.password}
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>User Type</Form.Label>
+            <Form.Select
+              name="userType"
+              value={logData.userType}
+              onChange={logHandleChange}
+              isInvalid={!!errors.userType}
+            >
+              <option value="">-- Select User Type --</option>
+              <option value="Admin">Admin</option>
+              <option value="Faculty">Faculty</option>
+              <option value="Student">Student</option>
+            </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              {errors.userType}
             </Form.Control.Feedback>
           </Form.Group>
 
