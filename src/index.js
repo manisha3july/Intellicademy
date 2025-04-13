@@ -14,7 +14,8 @@ import Signup from "./components/Signup";
 import Layout from "./components/Layout"; // Import Layout
 import Home from "./components/Home"
 import Blog from "./components/Blog";
-import AdminPage from './components/AdminPage';
+import AdminPage from './components/dashboard/AdminPage';
+import FacultyPage from './components/dashboard/FacultyPage'
 import reportWebVitals from "./reportWebVitals";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -36,6 +37,7 @@ root.render(
           <Route path="Blog" element={<Blog />} />
           <Route path="Signup" element={<Signup />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/faculty" element={<FacultyPage />} />
         </Route>
       </Routes>
     </Router>
