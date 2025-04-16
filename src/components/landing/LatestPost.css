@@ -17,25 +17,25 @@
     align-items:center;
     justify-content:center;
 }
-.slick-slider {
+.latestPost .slick-slider {
   height:100%;
 }
-.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+.latestPost .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
   color: #fff;
     background: #6790E8;
 }
-  .slick-prev:before, .slick-next:before {
+.latestPost  .slick-prev:before, .slick-next:before {
     display:none;
   }
   .Blog_Wrap {
     margin-bottom:40px;
   }
-  .slick-list {
+  .latestPost .slick-list {
     height:100%;
   }
-  .slick-track {
+  .latestPost .slick-track {
     height:100%;
   }
-  .slick-slide div {
+  .latestPost .slick-slide div {
     height:100%;
   }

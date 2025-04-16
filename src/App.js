@@ -3,12 +3,12 @@ import "./App.css";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Hero from "./components/Hero";
-import AboutTextImg from "./components/AboutTextImg.js";
-import AboutInfoCard from "./components/AboutInfoCard.js";
-import AIconcepts from "./components/AIconcepts.js";
-import LatestPost from "./components/LatestPost.js";
-import Contact from "./components/Contact.js";
+import Hero from "./components/banner/Hero.js";
+import AboutTextImg from "./components/landing/AboutTextImg.js";
+import AboutInfoCard from "./components/landing/AboutInfoCard.js";
+import AIconcepts from "./components/landing/AIconcepts.js";
+import LatestPost from "./components/landing/LatestPost.js";
+import Contact from "./components/landing/Contact.js";
 
 function App() {
 

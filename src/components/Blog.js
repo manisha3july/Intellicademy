@@ -1,5 +1,5 @@
 import React from 'react'
-import HeroInner from './HeroInner'
+import HeroInner from './banner/HeroInner'
 
 import AboutImg from '../assets/banner2.jpg'
 

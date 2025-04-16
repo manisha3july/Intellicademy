@@ -1,0 +1,58 @@
+.team-outer {
+    padding-bottom:30px;
+}
+
+.team-outer .slick-track {
+  display: flex !important;
+}
+
+.team-outer .slick-slide {
+  height: auto !important;
+  display: flex !important;
+}
+/* Adjust .team-box to grow uniformly */
+.team-box {
+  width: 97% !important; /* let Slick handle slidesToShow */
+  background-color: #f0f4fd;
+  padding: 15px;
+  border: solid 2px #6790e8;
+  height: 100%;
+  display: flex;
+}
+
+/* Let inner box fill parent */
+.team-box-inner {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+}
+
+/* Image box fixed width */
+.team-img {
+  width: 200px;
+  padding: 15px;
+  background-color: #fff;
+  border: solid 2px #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text content stretches */
+.team-content {
+  width: calc(100% - 220px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.team-outer .slick-dots {
+    bottom:-60px;
+}
+.slick-dots li button:before {
+    font-size:21px;
+}
+.slick-dots li.slick-active button:before {
+    color:#6790e8;
+}

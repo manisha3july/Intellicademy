@@ -40,6 +40,7 @@ const Header = ({ handleShow }) => {
     <Navbar
       expand="lg"
       fixed="top"
+      style={isScrolled || !isLandingPage ? { boxShadow: '0px 0px 14px rgba(0,0,0,0.3)' } : {}}
       className={`navbar ${isLandingPage ? "fixed-top" : "position-relative bg-white text-black"}
       ${isScrolled ? "navbar-light bg-white text-black animate" : "bg-transparent text-white"}`}
     >

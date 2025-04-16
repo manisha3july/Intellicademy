@@ -3,10 +3,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./LatestPost.css";
-import BlogImg from "../assets/blog.jpg";
+import BlogImg from "../../assets/blog.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import Section from './Section';
+import Section from '../Section';
 
 const NextArrow = (props) => {
   const { className, style, onClick } = props;

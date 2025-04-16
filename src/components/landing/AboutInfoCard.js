@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./about.css";
-import Section from "./Section.js";
-import counters from './utils/aboutData.js';
+import "../aboutPage/about.css";
+import Section from "../Section.js";
+import counters from '../utils/aboutData.js';
 
 function AboutCard() {
   const [isVisible, setIsVisible] = useState(false);

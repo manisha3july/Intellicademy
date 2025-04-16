@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./AIconcepts.css";
-import aiConceptsData  from "./utils/aiConceptData";
-import Section from "./Section";
+import aiConceptsData  from "../utils/aiConceptData";
+import Section from "../Section";
 
 function AIconcepts() {
   return (

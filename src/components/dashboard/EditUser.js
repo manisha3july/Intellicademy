@@ -4,7 +4,7 @@ import { Modal, Button, Form, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const UserType = ["Admin", "Faculty", "Student"];
-const EditUser = ({ show, handleClose, userData, refreshUsers }) => {
+const EditUser = ({ show, handleClose, userData, refreshUsers, onUpdateUser, currentUserType  }) => {
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -44,6 +44,10 @@ const EditUser = ({ show, handleClose, userData, refreshUsers }) => {
         formData
       );
       alert("User updated successfully!");
+      // Pass updated user back to StudentPage
+      if (typeof onUpdateUser === "function") {
+        onUpdateUser(user);
+      }
       handleClose();
       refreshUsers();
     } catch (error) {
@@ -83,8 +87,9 @@ const EditUser = ({ show, handleClose, userData, refreshUsers }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder="Update your email"
               isInvalid={!!errors.name}
+              disabled={currentUserType === "Student"}
             />
             <Form.Control.Feedback type="invalid">
               {errors.name}
@@ -98,7 +103,7 @@ const EditUser = ({ show, handleClose, userData, refreshUsers }) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter password"
+              placeholder="Update password"
               isInvalid={!!errors.password}
             />
             <Form.Control.Feedback type="invalid">
@@ -109,11 +114,11 @@ const EditUser = ({ show, handleClose, userData, refreshUsers }) => {
           <Form.Group className="mb-3">
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="number"
               value={formData.number}
               onChange={handleChange}
-              placeholder="Enter your Phone number"
+              placeholder="Update your phone number"
               isInvalid={!!errors.name}
             />
             <Form.Control.Feedback type="invalid">
@@ -131,6 +136,7 @@ const EditUser = ({ show, handleClose, userData, refreshUsers }) => {
               value={formData.userType}
               onChange={handleChange}
               isInvalid={!!errors.userType}
+              disabled={currentUserType === "Student"}
             >
               <option value="">Select User Type</option>
               {UserType.map((type) => (

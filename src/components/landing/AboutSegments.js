@@ -2,7 +2,7 @@ import React from 'react'
 
 // import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import segments from './utils/segments';
+import segments from '../utils/segments';
 import { color } from 'framer-motion';
 function AboutSegments() {
 

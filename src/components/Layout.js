@@ -4,7 +4,7 @@
 import React, { useState } from "react"; // ✅ Fix: Removed duplicate import
 import Header from "./Header";
 import Footer from "./Footer";
-import Login from "./Login.js";
+import Login from "./loginSignup/Login.js";
 import { Outlet } from "react-router-dom";
 
 const Layout = ({  }) => {

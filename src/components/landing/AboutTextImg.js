@@ -1,9 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AboutImg from "../assets/AI.jpg";
+import AboutImg from "../../assets/AI.jpg";
 import { faBookOpenReader } from "@fortawesome/free-solid-svg-icons";
-import Section from "./Section";
-import "./about.css";
+import Section from "../Section";
+import "../aboutPage/about.css";
 function AboutTextImg() {
   return (
     <Section className="About-section anibox p-5">

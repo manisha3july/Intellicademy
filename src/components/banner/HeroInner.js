@@ -1,6 +1,6 @@
 import React from "react";
 import "./Hero.css";
-import Section from "./Section";
+import Section from "../Section";
 import { motion } from "framer-motion";
 
 function HeroInner({ bgimage, title }) {

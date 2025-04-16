@@ -1,7 +1,7 @@
 import React from "react";
 import "./Hero.css";
-import Section from "./Section";
-import HeroImg from '../assets/blog-hero.png'
+import Section from "../Section";
+import HeroImg from '../../assets/blog-hero.png'
 import { motion } from "framer-motion";
 
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap CSS is included
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login({ show, handleClose }) {
   const [logData, setLogData] = useState({
@@ -11,6 +13,7 @@ function Login({ show, handleClose }) {
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+  const navigates = useNavigate();
 
   const logHandleChange = (e) => {
     const { name, value } = e.target;
@@ -26,15 +29,47 @@ function Login({ show, handleClose }) {
     return Object.keys(errors).length === 0;
   };
 
-  const handleLogIn = (e) => {
+  const handleLogIn = async (e) => {
     e.preventDefault();
-    if (validateLog()) {
-      setSuccessMessage(`Thank you for logging in, ${logData.name}!`);
-      setTimeout(() => {
-        setSuccessMessage("");
-        setLogData({ name: "", email: "", password: "", userType: ""});
-        handleClose(); // Close modal after success
-      }, 2000);
+
+    if (!validateLog()) return;
+
+    try {
+      const response = await axios.get("http://localhost:3006/users");
+      const users = response.data;
+
+      const matchedUser = users.find(
+        (user) =>
+          user.name === logData.name &&
+          user.password === logData.password &&
+          user.userType === logData.userType
+      );
+
+      if (matchedUser) {
+        localStorage.setItem("user", JSON.stringify(matchedUser));
+        setSuccessMessage(`Welcome, ${matchedUser.name}!`);
+
+        setTimeout(() => {
+          setSuccessMessage("");
+          setLogData({ name: "", email: "", password: "", userType: "" });
+          handleClose();
+          if (matchedUser.userType === "Admin") {
+            navigates("/admin");
+          } else if (matchedUser.userType === "Faculty") {
+            navigates("/faculty");
+          } else {
+            navigates("/student");
+          }
+        }, 1500);
+      } else {
+        setErrors({
+          ...errors,
+          general: "Invalid username, password, or user type.",
+        });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setErrors({ ...errors, general: "Server error. Try again later." });
     }
   };
 
@@ -47,6 +82,12 @@ function Login({ show, handleClose }) {
         {successMessage && (
           <Alert variant="success" className="text-center">
             {successMessage}
+          </Alert>
+        )}
+
+        {errors.general && (
+          <Alert variant="danger" className="text-center">
+            {errors.general}
           </Alert>
         )}
 

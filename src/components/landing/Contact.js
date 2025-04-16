@@ -5,8 +5,8 @@ import {
   faEnvelope,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import Section from "./Section";
-import "./contact.css";
+import Section from "../Section";
+import "../contact.css";
 
 function Contact() {
   const [formData, setFormData] = useState({

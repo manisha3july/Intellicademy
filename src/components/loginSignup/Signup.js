@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./signup.css"; // Import custom styles
-import Section from "./Section";
+import Section from "../Section";
 import axios from "axios";
-import AdminPage from "./dashboard/AdminPage";
+import AdminPage from "../dashboard/AdminPage";
 import { useNavigate } from "react-router-dom";
-import SignupImg from "../../src/assets/contact-hero.png";
+import SignupImg from "../../assets/contact-hero.png";
 
 const UserType = ["Admin", "Faculty", "Student"];
 
@@ -34,6 +34,8 @@ const Signup = () => {
 
       if (formData.userType == "Faculty") {
         navigate("/faculty");
+      } else if (formData.userType == "Student"){
+        navigate("/student");
       } else {
         navigate("/admin");
       }
