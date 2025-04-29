@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, location } from "react-router-dom";
 
 function Login({ show, handleClose }) {
   const [logData, setLogData] = useState({
@@ -11,10 +11,10 @@ function Login({ show, handleClose }) {
     password: "",
   });
 
+  
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const navigates = useNavigate();
-
   const logHandleChange = (e) => {
     const { name, value } = e.target;
     setLogData({ ...logData, [name]: value });
@@ -22,7 +22,7 @@ function Login({ show, handleClose }) {
 
   const validateLog = () => {
     let errors = {};
-    if (!logData.name.trim()) errors.name = "Username is required";
+    if (!logData.email.trim()) errors.email = "Email is required";
     if (!logData.password.trim()) errors.password = "Password is required";
     if (!logData.userType) errors.userType = "Please select a user type";
     setErrors(errors);
@@ -40,7 +40,7 @@ function Login({ show, handleClose }) {
 
       const matchedUser = users.find(
         (user) =>
-          user.name === logData.name &&
+          user.email === logData.email &&
           user.password === logData.password &&
           user.userType === logData.userType
       );
@@ -64,7 +64,7 @@ function Login({ show, handleClose }) {
       } else {
         setErrors({
           ...errors,
-          general: "Invalid username, password, or user type.",
+          general: "Invalid Email, password, or user type.",
         });
       }
     } catch (error) {
@@ -93,17 +93,17 @@ function Login({ show, handleClose }) {
 
         <Form onSubmit={handleLogIn}>
           <Form.Group className="mb-3">
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
-              type="text"
-              name="name"
-              value={logData.name}
+              type="email"
+              name="email"
+              value={logData.email}
               onChange={logHandleChange}
-              placeholder="Enter your full name"
-              isInvalid={!!errors.name}
+              placeholder="Enter your email"
+              isInvalid={!!errors.email}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.name}
+              {errors.email}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -114,7 +114,7 @@ function Login({ show, handleClose }) {
               name="password"
               value={logData.password}
               onChange={logHandleChange}
-              placeholder="Enter password"
+              placeholder="Enter your password"
               isInvalid={!!errors.password}
             />
             <Form.Control.Feedback type="invalid">

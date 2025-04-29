@@ -1,32 +1,10 @@
 import React, { useState } from "react";
-import { Container, Nav, Tab } from "react-bootstrap";
+import { Container, Row, Col, Nav, Tab } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import values from '../utils/values'
 
-const values = [
-  {
-    key: "curiosity",
-    icon: "fas fa-lightbulb",
-    title: "Curiosity-Driven",
-    text: "We believe curiosity is the spark of all innovation. Our content is designed to inspire exploration and experimentation.",
-  },
-  {
-    key: "evolving",
-    icon: "fas fa-sync-alt",
-    title: "Always Evolving",
-    text: "Just like AI, we constantly adapt — updating our courses, tools, and content to keep pace with the latest advancements.",
-  },
-  {
-    key: "community",
-    icon: "fas fa-users",
-    title: "Community First",
-    text: "Learning is better together. We foster a collaborative, global environment where knowledge flows in every direction.",
-  },
-  {
-    key: "impact",
-    icon: "fas fa-bullseye",
-    title: "Impact-Oriented",
-    text: "Our focus isn’t just on learning for learning’s sake. We care about real-world application, real results, and real change.",
-  },
-];
+
+
 
 function Values() {
   const [activeTab, setActiveTab] = useState(values[0].key);
@@ -34,28 +12,59 @@ function Values() {
   return (
     <section className="py-5 bg-light">
       <Container>
-        <h3 className="text-center mb-4">Our Values</h3>
+        <h3 className="text-center mb-5">Our Values</h3>
         <Tab.Container activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
-          <Nav variant="pills" className="justify-content-center mb-4 flex-wrap">
-            {values.map((val) => (
-              <Nav.Item key={val.key}>
-                <Nav.Link eventKey={val.key} className="text-center mx-2 px-3 py-2">
-                  <i className={`${val.icon} me-2`}></i>
-                  {val.title}
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-          <Tab.Content>
-            {values.map((val) => (
-              <Tab.Pane eventKey={val.key} key={val.key}>
-                <div className="text-center px-4 px-md-5">
-                  <h5 className="mb-3 text-primary">{val.title}</h5>
-                  <p className="lead">{val.text}</p>
-                </div>
-              </Tab.Pane>
-            ))}
-          </Tab.Content>
+          <Row className="d-flex">
+            <Col md={4}>
+              <Nav className="flex-column">
+                {values.map((val) => (
+                  <Nav.Item key={val.key}>
+                    <Nav.Link
+                      eventKey={val.key}
+                      style={
+                         activeTab === val.key
+                          ? { backgroundColor: "#fff", color: "#6790E8", border: 'soild 2px #6790E8',
+                            border: 'solid 2px #6790E8', padding: '15px', fontWeight : "700" }
+                          : { backgroundColor: "#6790E8", color: "#fff" , padding: '15px' }
+                      }
+                      className="mb-2"
+                    >
+                   
+                   
+                      {val.title}
+                    </Nav.Link>
+                  </Nav.Item>
+                ))}
+              </Nav>
+            </Col>
+            <Col md={8}>
+              <div
+                style={{
+                  maxHeight: "300px",
+                  overflowY: "auto",
+                  backgroundColor: "#fff",
+                  padding: "20px",
+                  borderRadius: "8px",
+                  height: '100%',
+                  boxShadow: "rgba(0, 0, 0, 0.3) 3px 2px 10px -2px",
+                  display: 'flex',
+                  alignItems: 'center',
+                  borderLeft: 'solid 5px #6790e8',
+                  textAlign:'center'
+                }}
+              >
+                <Tab.Content>
+                  {values.map((val) => (
+                    <Tab.Pane eventKey={val.key} key={val.key}>
+                       <FontAwesomeIcon icon={val.icon} style={{fontSize: "80px", color: '#6790e8', marginBottom: '15px'}} />
+                      <h5 className="mb-2"><b>{val.title}</b></h5>
+                      <p className="lead">{val.text}</p>
+                    </Tab.Pane>
+                  ))}
+                </Tab.Content>
+              </div>
+            </Col>
+          </Row>
         </Tab.Container>
       </Container>
     </section>

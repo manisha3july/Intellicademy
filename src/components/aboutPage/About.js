@@ -1,9 +1,10 @@
 import React from "react";
 import HeroImgTxt from "../banner/HeroImgTxt";
 import GraphData from "../dashboard/GraphData";
-import AboutSegments from "../landing/AboutSegments";
+import AboutSegments from "./AboutSegments";
 import Team from "./Team";
 import Values from "./Values";
+
 
 function About() {
   return (
@@ -19,9 +20,10 @@ function About() {
             <AboutSegments />
           </div>
         </div>
+        </div>
         <Values />
         <Team />
-      </div>
+      
 
     </>
   );

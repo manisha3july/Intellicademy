@@ -72,10 +72,10 @@ const Header = ({ handleShow }) => {
                 variant="link"
                 className={`nav-link dropdown-toggle ${isLandingPage  && !isScrolled ? "text-white" : "text-black"}`}
               >
-                AI Concepts
+                All Courses
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item href="#">Machine Learning</Dropdown.Item>
+                <Dropdown.Item  as={Link} to="/courses" >Machine Learning</Dropdown.Item>
                 <Dropdown.Item href="#">Deep Learning</Dropdown.Item>
                 <Dropdown.Item href="#">Generative AI</Dropdown.Item>
                 <Dropdown.Item href="#">Data Analytics</Dropdown.Item>

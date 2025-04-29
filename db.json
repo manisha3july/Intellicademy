@@ -2,28 +2,19 @@
   "users": [
     {
       "name": "Riya AGrawaldfgfg",
-      "password": "Riya@1234",
+      "password": "Riya@1234dddddg",
       "email": "riya@gmail.com",
       "userType": "Faculty",
       "number": "07521940837",
       "id": "ced5"
     },
     {
-      "name": "tiaggg",
-      "password": "Mani@1234",
-      "email": "manisha3july@gmail.com",
-      "userType": "Admin",
-      "number": "07521940837",
-      "id": "0544"
-    },
-    {
-      "id": "d0cc",
       "name": "User3",
-      "email": "user3@gmail.com",
       "password": "User1234",
-      "confirmPassword": "User1234",
+      "email": "user3@gmail.com",
+      "userType": "Student",
       "number": "07521940837",
-      "userType": "Admin"
+      "id": "d0cc"
     },
     {
       "name": "Baby Agrawalfgf",
@@ -51,21 +42,83 @@
       "id": "436b"
     },
     {
-      "id": "6586",
       "name": "User5",
-      "email": "User5@gmail.com",
       "password": "User51234",
-      "confirmPassword": "User51234",
+      "email": "User5@gmail.com",
+      "userType": "Student",
       "number": "07521940837",
-      "userType": "Faculty"
+      "id": "6586"
     },
     {
       "name": "Tapan",
       "password": "User61234dufhro",
       "email": "User6@gmail.com",
-      "userType": "Student",
+      "userType": "Admin",
       "number": "049943969596",
       "id": "761e"
+    },
+    {
+      "id": "ce68",
+      "name": "Rishu AGragrawal",
+      "email": "Rishu@gmail.com",
+      "password": "Rishu1234",
+      "confirmPassword": "Rishu1234",
+      "number": "07521940837",
+      "userType": "Admin"
+    },
+    {
+      "id": "e814",
+      "name": "Manisha Agrawal",
+      "email": "manisha3july@gmail.com",
+      "password": "Mani@1234",
+      "confirmPassword": "Mani@1234",
+      "number": "07521940837",
+      "userType": "Admin"
+    },
+    {
+      "id": "4c5a",
+      "name": "Manisha Agrawal",
+      "email": "manisha3july@gmail.com",
+      "password": "Mani@1234#",
+      "confirmPassword": "Mani@1234#",
+      "number": "07521940837",
+      "userType": "Admin"
+    },
+    {
+      "id": "14cc",
+      "name": "useer1 Agrawal",
+      "email": "manisha3july@gmail.com",
+      "password": "Mani@1234",
+      "confirmPassword": "Mani@1234",
+      "number": "07521940837",
+      "userType": "Admin"
+    },
+    {
+      "id": "b277",
+      "name": "User6",
+      "email": "User6@gmail.com",
+      "password": "User61234",
+      "confirmPassword": "User61234",
+      "number": "07521940837",
+      "userType": "Admin"
+    },
+    {
+      "id": "9571",
+      "name": "user9",
+      "email": "user9@gmail.com",
+      "password": "user91234",
+      "confirmPassword": "user91234",
+      "number": "07521940837",
+      "userType": "Faculty"
+    },
+    {
+      "id": "058b",
+      "name": "user10",
+      "email": "user10@gmail.com",
+      "password": "user101234",
+      "confirmPassword": "user101234",
+      "number": "07521940837",
+      "userType": "Admin"
     }
   ]
 }

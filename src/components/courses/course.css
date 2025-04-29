@@ -1,0 +1,48 @@
+/* Scrollbar for navigation list */
+
+.tab_content {
+    direction: rtl; /* Flip content layout */
+    overflow-y: scroll;
+    scrollbar-width: thin; /* Optional: Firefox scrollbar style */
+    scrollbar-color: #6790E8 transparent; /* Optional: scrollbar color */
+  }
+  
+.tab_content * {
+    direction: ltr; /* Reset child direction so text stays normal */
+  }
+.tab_content::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .tab_content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  .tab_content::-webkit-scrollbar-thumb {
+    background-color: #6790e8;  /* 🎨 your desired color */
+    border-radius: 5px;
+  }
+  
+  .tab_content::-webkit-scrollbar-thumb:hover {
+    background: #4a6dc7;
+  }
+  .list-group-item.active {
+    background-color: #6790e8; 
+  }
+
+  .course-card {
+    border-left: 6px solid #6790e8 !important;
+    border-radius: 12px;
+    height:100%;
+  }
+  
+  .check-icon {
+    color: #28a745;
+    font-size: 1.2rem;
+    margin-top: 2px;
+  }
+  
+  .list-unstyled {
+    padding-left: 0;
+  }

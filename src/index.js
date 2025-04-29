@@ -15,6 +15,7 @@ import Blog from "./components/Blog";
 import AdminPage from "./components/dashboard/AdminPage";
 import FacultyPage from "./components/dashboard/FacultyPage";
 import StudentPage from "./components/dashboard/StudentPage";
+import CoursePage from "./components/courses/CoursePage";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -35,11 +36,11 @@ root.render(
           <Route path="aiconcepts" element={<AIconcepts />} />
           <Route path="blog" element={<Blog />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="/admin" element={<AdminPage />} />
-        <Route path="/faculty" element={<FacultyPage />} />
-        <Route path="/student" element={<StudentPage />} />
+          <Route path="/faculty" element={<FacultyPage />} />
+          <Route path="/student" element={<StudentPage />} />
+          <Route path="/courses" element={<CoursePage />} />
         </Route>
-
+        <Route path="/admin" element={<AdminPage />} />
         {/* Dashboard routes - no Layout */}
        
       </Routes>

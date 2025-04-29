@@ -10,18 +10,26 @@ import { faTrashCan, faUserPen } from "@fortawesome/free-solid-svg-icons";
 import GraphData from "./GraphData";
 import GraphChange from "./GraphChange";
 import SearchBox from "./SearchBox";
-
+import Signup from "../loginSignup/Signup";
+import UserTypeFilter from "./UserTypeFilter";
 
 function AdminPage() {
   const [usersData, setUsersData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [chartType, setChartType] = useState("pie");
+  const [chartType, setChartType] = useState("bar");
+  const [userTypeFilter, setUserTypeFilter] = useState("");
 
-  const filteredUsers = usersData.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredUsers = usersData.filter((user) => {
+    const matchesSearch = user.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesType = userTypeFilter
+      ? user.userType === userTypeFilter
+      : true;
+    return matchesSearch && matchesType;
+  });
 
   useEffect(() => {
     fetchUsersData();
@@ -72,10 +80,15 @@ function AdminPage() {
   return (
     <Section className="adminContainer lightBlueBg">
       <div className="container">
-        <h5 style={{ fontWeight: "500" }} className="mb-4">
-          {" "}
-          Welcome {currentUser.name} to Admin Dashboard
-        </h5>
+        <div className="heading d-flex align-items-center flex-column">
+          <p className="mb-0">Admin Dashboard</p>
+          <h5 style={{ fontWeight: "700", fontSize: "32px" }} className="mb-4">
+            Welcome{" "}
+            <span style={{ fontWeight: "500", color: " #6790E8" }}>
+              {currentUser.name}{" "}
+            </span>
+          </h5>
+        </div>
 
         <EditUser
           show={showModal}
@@ -84,87 +97,9 @@ function AdminPage() {
           refreshUsers={fetchUsersData}
         />
 
-        <SearchBox searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-
-        <div className="row mt-2">
-          <div className="col-sm-8">
-            <div className="table-responsive">
-            <table
-              className="table table-bordered table-striped"
-              style={{ backgroundColor: "#fff" }}
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Password</th>
-                  <th>Number</th>
-                  <th>User Type</th>
-                  <th>Update</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredUsers.length > 0 ? (
-                  filteredUsers
-                    .sort((a, b) => {
-                      const order = { Admin: 0, Faculty: 1, Student: 2 };
-                      return order[a.userType] - order[b.userType];
-                    })
-                    .map((user) => (
-                      <tr key={user.id}>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>{user.password}</td>
-                        <td>{user.number}</td>
-                        <td>{user.userType}</td>
-                        <td>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <button
-                              className="btn btn-edit"
-                              onClick={() => handleEdit(user)}
-                              style={{
-                                padding: "5px 10px",
-                                background: "#6790E8",
-                                color: "#fff",
-                                marginRight: "5px",
-                              }}
-                            >
-                              <FontAwesomeIcon icon={faUserPen} />
-                            </button>
-                            <button
-                              className="btn btn-delete"
-                              style={{
-                                backgroundColor: "#f43c3c",
-                                padding: "5px 10px",
-                                color: "#fff",
-                              }}
-                              onClick={() => handleDelete(user.id)}
-                            >
-                              <FontAwesomeIcon icon={faTrashCan} />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                ) : (
-                  <tr>
-                    <td colSpan="6" className="text-center">
-                      No users found or loading...
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-            </div>
-          </div>
-          <div className="col-sm-4">
-          <GraphChange chartType={chartType} setChartType={setChartType}  />
+        <div className="row d-flex align-item-center justify-content-start">
+          <div className="col-sm-6 d-flex align-item-center justify-content-center  flex-column">
+            <GraphChange chartType={chartType} setChartType={setChartType} />
             <GraphData
               studenTitle="Students"
               facultyTitle="Faculties"
@@ -174,7 +109,103 @@ function AdminPage() {
               adminCount={adminCount}
               chartType={chartType}
             />
-           
+          </div>
+          <div className="col-sm-6 d-flex align-item-center justify-content-center flex-column">
+            <Signup onUserAdded={fetchUsersData} />
+          </div>
+        </div>
+        <div
+          className="p-4 mb-2 d-flex justify-content-between"
+          
+          style={{
+            backgroundColor: "#fff",
+            boxShadow: "rgba(0, 0, 0, 0.3) 0px 4px 5px 0px",
+            
+          }}
+        >
+          <SearchBox searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
+            <UserTypeFilter
+              userType={userTypeFilter}
+              onChange={setUserTypeFilter}
+            />
+        </div>
+        <div className="p-4" style={{ backgroundColor: "#fff" }}>
+          <div className="row ">
+            <div className="col-sm-12 ">
+              <div className="table-responsive ">
+                <table
+                  className="table table-bordered mb-0 table-striped"
+                  style={{ backgroundColor: "#fff" }}
+                >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+
+                      <th>Number</th>
+                      <th>User Type</th>
+                      <th>Update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredUsers.length > 0 ? (
+                      filteredUsers
+                        .sort((a, b) => {
+                          const order = { Admin: 0, Faculty: 1, Student: 2 };
+                          return order[a.userType] - order[b.userType];
+                        })
+                        .map((user) => (
+                          <tr key={user.id}>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>{user.number}</td>
+                            <td>{user.userType}</td>
+                            <td>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <button
+                                  className="btn btn-edit"
+                                  onClick={() => handleEdit(user)}
+                                  style={{
+                                    padding: "5px 10px",
+                                    background: "#6790E8",
+                                    color: "#fff",
+                                    marginRight: "5px",
+                                  }}
+                                >
+                                  <FontAwesomeIcon icon={faUserPen} />
+                                </button>
+                                <button
+                                  className="btn btn-delete"
+                                  style={{
+                                    backgroundColor: "#f43c3c",
+                                    padding: "5px 10px",
+                                    color: "#fff",
+                                  }}
+                                  onClick={() => handleDelete(user.id)}
+                                >
+                                  <FontAwesomeIcon icon={faTrashCan} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6" className="text-center">
+                          No users found or loading...
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>

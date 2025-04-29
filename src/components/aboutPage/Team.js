@@ -19,7 +19,7 @@ function Team() {
   };
 
   return (
-    <Section className={"team-container"}>
+    <Section className={"team-container py-5"}>
       <div className="container">
         <div className="heading justify-content-center">
           <h3 className="text-center">Our Team</h3>
