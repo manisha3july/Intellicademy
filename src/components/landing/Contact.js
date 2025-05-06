@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import emailjs from '@emailjs/browser';
 import {
   faPhone,
   faEnvelope,
@@ -12,34 +13,69 @@ function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    mobileNumber: "",
+    number: "",
     message: "",
   });
 
+
+
+  const form = useRef();
+
+
+
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (!formData.name.trim()) {
       alert("Please fill in your name.");
-    } else if (!formData.email.trim()) {
+      return;
+    }
+    if (!formData.email.trim()) {
       alert("Please fill in your email.");
-    } else if (!formData.mobileNumber.trim()) {
+      return;
+    }
+    if (!formData.number.trim()) {
       alert("Please fill in your mobile number.");
-    } else if (!formData.message.trim()) {
+      return;
+    }
+    if (!formData.message.trim()) {
       alert("Please fill in your message.");
-    } else {
-      alert("Thank you!");
+      return;
+    }
+  
+    // Create template params
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      number: formData.number,
+      message: formData.message,
+    };
+  
+    emailjs.send(
+      'service_3sj293e',
+      'template_f76shxt',
+      templateParams,
+      'FPEsE13zoDX52Wlq0'
+    )
+    .then((response) => {
+      alert("Message sent successfully!");
+      console.log(response.text);
       setFormData({
         name: "",
         email: "",
-        mobileNumber: "",
+        number: "",
         message: "",
       });
-    }
+    })
+    .catch((error) => {
+      alert("Failed to send message. Please try again.");
+      console.error("EmailJS error:", error);
+    });
   };
 
   return (
@@ -87,7 +123,8 @@ function Contact() {
           {/* Contact Form Section */}
           <div className="col-sm-6">
             <div className="card shadow-lg p-4 border-0">
-              <form onSubmit={handleSubmit}>
+              
+              <form ref={form} onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label className="form-label">Name</label>
                   <input
@@ -115,8 +152,8 @@ function Contact() {
                   <input
                     type="tel"
                     className="form-control"
-                    value={formData.mobileNumber}
-                    name="mobileNumber"
+                    value={formData.number}
+                    name="number"
                     placeholder="Enter your mobile number"
                     onChange={handleChange}
                   />

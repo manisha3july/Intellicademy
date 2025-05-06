@@ -16,6 +16,7 @@ import AdminPage from "./components/dashboard/AdminPage";
 import FacultyPage from "./components/dashboard/FacultyPage";
 import StudentPage from "./components/dashboard/StudentPage";
 import CoursePage from "./components/courses/CoursePage";
+import ContactPage from "./components/ContactPage";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -35,6 +36,7 @@ root.render(
           <Route path="about" element={<About />} />
           <Route path="aiconcepts" element={<AIconcepts />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="signup" element={<Signup />} />
           <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/student" element={<StudentPage />} />

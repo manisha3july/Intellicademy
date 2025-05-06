@@ -1,5 +1,5 @@
 {
-  "courseTitle": "GenerativeAI",
+  "courseTitle": "Generative AI",
   "tagline": "Create the Future with Intelligent Generative Systems",
   "description": "This Generative AI course is designed to equip learners with cutting-edge knowledge of AI models that generate content—whether text, images, audio, or code. From mastering the fundamentals of transformers to building your own generative tools, you'll gain the skills needed to work with the most exciting advancements in AI today.",
   "whatIsML": "Generative AI refers to a class of artificial intelligence models that can generate new content by learning patterns from existing data. Unlike traditional AI that classifies or predicts, generative models create—writing poems, generating images, composing music, or even coding. It's powered by advanced models like GANs, VAEs, and Transformers, including GPT, DALL·E, and Stable Diffusion.",

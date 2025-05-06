@@ -1,5 +1,5 @@
 {
-  "courseTitle": "NeuralNetworks",
+  "courseTitle": "Neural Networks",
   "tagline": "Understand the Brains Behind AI",
   "description": "This Neural Networks course is designed to give you a solid foundation in how artificial neurons mimic the human brain to power modern AI systems. You'll learn to build, train, and optimize neural networks from scratch using Python and deep learning frameworks like TensorFlow and PyTorch.",
   "whatIsML": "Neural Networks are a subset of Machine Learning models inspired by the human brain. They consist of layers of interconnected nodes (neurons) that process input data and learn complex patterns. Neural networks are the foundation of many modern AI systems, including image recognition, natural language processing, and autonomous systems.",

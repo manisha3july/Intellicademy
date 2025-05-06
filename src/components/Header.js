@@ -5,7 +5,6 @@ import logodark from "../assets/logo.png";
 import { Navbar, Nav, Button, Container, Dropdown } from "react-bootstrap";
 import "./header.css";
 
-
 const Header = ({ handleShow }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,73 +29,85 @@ const Header = ({ handleShow }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
+  const toggleDropdown = (isOpen) => {
+    setDropdownOpen(isOpen);
   };
 
   const isSignupPage = location.pathname === "/signup";
   const isLandingPage = location.pathname === "/";
+
   return (
     <Navbar
       expand="lg"
       fixed="top"
       style={isScrolled || !isLandingPage ? { boxShadow: '0px 0px 14px rgba(0,0,0,0.3)' } : {}}
-      className={`navbar ${isLandingPage ? "fixed-top" : "position-relative bg-white text-black"}
+      className={`navbar ${isLandingPage ? "fixed-top" : "position-relative bg-white text-black"} 
       ${isScrolled ? "navbar-light bg-white text-black animate" : "bg-transparent text-white"}`}
     >
       <Container>
-        {/* Logo on the left */}
+        {/* Logo */}
         <Navbar.Brand href="/">
           <img
-            src={isLandingPage && !isScrolled ?  logo : logodark}
+            src={isLandingPage && !isScrolled ? logo : logodark}
             className="logo-img"
             alt="Company Logo"
           />
         </Navbar.Brand>
 
-        {/* Navbar Toggle for Mobile */}
+        {/* Mobile Toggle */}
         <Navbar.Toggle aria-controls="navbar-nav" className="border-0" />
 
         <Navbar.Collapse id="navbar-nav" className="justify-content-center">
           <Nav className="align-items-center">
-            <Nav.Link  href="" className={isLandingPage && !isScrolled ? "text-white" : "text-black"} >
+            <Nav.Link as={Link} to="/" className={isLandingPage && !isScrolled ? "text-white" : "text-black"}>
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/about"  className={isLandingPage && !isScrolled ? "text-white" : "text-black"} >
+            <Nav.Link as={Link} to="/about" className={isLandingPage && !isScrolled ? "text-white" : "text-black"}>
               About
             </Nav.Link>
 
-            {/* AI Concepts Dropdown */}
+            {/* Courses Dropdown */}
             <Dropdown ref={dropdownRef} show={dropdownOpen} onToggle={toggleDropdown}>
               <Dropdown.Toggle
                 variant="link"
-                className={`nav-link dropdown-toggle ${isLandingPage  && !isScrolled ? "text-white" : "text-black"}`}
+                className={`nav-link dropdown-toggle ${isLandingPage && !isScrolled ? "text-white" : "text-black"}`}
               >
                 All Courses
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item  as={Link} to="/courses" >Machine Learning</Dropdown.Item>
-                <Dropdown.Item href="#">Deep Learning</Dropdown.Item>
-                <Dropdown.Item href="#">Generative AI</Dropdown.Item>
-                <Dropdown.Item href="#">Data Analytics</Dropdown.Item>
-                <Dropdown.Item href="#">Neural Networks</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/courses?course=machineLearning">
+                  Machine Learning
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/courses?course=deepLearning">
+                  Deep Learning
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/courses?course=generativeAi">
+                  Generative AI
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/courses?course=dataAnalytics">
+                  Data Analytics
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to="/courses?course=neuralNetworks">
+                  Neural Networks
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
 
-            <Nav.Link as={Link} to="/blog"  className={isLandingPage  && !isScrolled ? "text-white" : "text-black"}>
+            {/* Normal Nav Items */}
+            <Nav.Link as={Link} to="/blog" className={isLandingPage && !isScrolled ? "text-white" : "text-black"}>
               Blog
             </Nav.Link>
-            <Nav.Link href="#" className={isLandingPage  && !isScrolled ? "text-white" : "text-black"}>
+            <Nav.Link as={Link} to="/contact" className={isLandingPage && !isScrolled ? "text-white" : "text-black"}>
               Contact Us
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
 
-        {/* Buttons on the Right */}
+        {/* Login / Signup Buttons */}
         <div className="d-flex align-items-center">
           {!isLoggedIn && (
             <Button
-              variant={isLandingPage && !isScrolled ? "outline-light" : " blueHeaderBtn"}
+              variant={isLandingPage && !isScrolled ? "outline-light" : "blueHeaderBtn"}
               className="me-2"
               onClick={handleShow}
             >
@@ -104,7 +115,7 @@ const Header = ({ handleShow }) => {
             </Button>
           )}
           <Button
-            variant={isLandingPage && !isScrolled ? "outline-light" : " blueHeaderBtn"}
+            variant={isLandingPage && !isScrolled ? "outline-light" : "blueHeaderBtn"}
             onClick={() => navigate("/signup")}
           >
             Sign up
