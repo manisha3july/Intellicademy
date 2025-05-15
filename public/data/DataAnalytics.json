@@ -1,15 +1,16 @@
+
 {
   "courseTitle": "Data Analytics",
   "tagline": "Turn Data Into Actionable Insights",
   "description": "This Data Analytics course is built for those who want to understand, analyze, and visualize data effectively. You'll learn industry-relevant tools and techniques to uncover patterns, make data-driven decisions, and present findings clearly. Whether you're starting out or upskilling, this course will guide you through real-world scenarios with hands-on projects.",
   "whatIsML": "Data Analytics is the science of examining raw data to uncover useful information, draw conclusions, and support decision-making. It includes data collection, processing, visualization, and interpretation. Unlike Machine Learning, Data Analytics is more focused on understanding and explaining past data rather than predicting future outcomes.",
+  "videoPoster": "/videos/da.png",
+  "videoPath": "/videos/data.mp4",
   "whatYouWillLearn": [
     "Data Analysis Workflow: Understand the complete cycle from raw data to decision-making.",
     "Excel & Google Sheets: Perform statistical analysis and clean data using spreadsheet tools.",
     "SQL for Data Analytics: Query, filter, and aggregate data from relational databases.",
-    "Python for Analytics: Use libraries like pandas, NumPy, and Matplotlib for in-depth analysis.",
-    "Data Visualization: Create interactive dashboards with Tableau and Power BI.",
-    "Business Intelligence: Translate analytical insights into impactful business recommendations."
+    "Python for Analytics: Use libraries like pandas, NumPy, and Matplotlib for in-depth analysis."
   ],
   "courseHighlights": [
     "Descriptive, Diagnostic, and Exploratory Analysis",

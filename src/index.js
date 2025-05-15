@@ -11,7 +11,7 @@ import About from "./components/aboutPage/About";
 import AIconcepts from "./components/landing/AIconcepts";
 import Signup from "./components/loginSignup/Signup";
 import Layout from "./components/Layout";
-import Blog from "./components/Blog";
+import Blog from "./components/blog/Blog";
 import AdminPage from "./components/dashboard/AdminPage";
 import FacultyPage from "./components/dashboard/FacultyPage";
 import StudentPage from "./components/dashboard/StudentPage";
@@ -34,15 +34,16 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
           <Route path="about" element={<About />} />
-          <Route path="aiconcepts" element={<AIconcepts />} />
           <Route path="blog" element={<Blog />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="/faculty" element={<FacultyPage />} />
+         
+          <Route path="courses" element={<CoursePage />} />
+           <Route path="/admin" element={<AdminPage />} />
+            <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/student" element={<StudentPage />} />
-          <Route path="/courses" element={<CoursePage />} />
         </Route>
-        <Route path="/admin" element={<AdminPage />} />
+       
         {/* Dashboard routes - no Layout */}
        
       </Routes>

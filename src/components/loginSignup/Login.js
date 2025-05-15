@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { useNavigate, location } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login({ show, handleClose }) {
   const [logData, setLogData] = useState({
     name: "",
     email: "",
     password: "",
+    userType: "",
   });
 
-  
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
-  const navigates = useNavigate();
+  const [loading, setLoading] = useState(false); // Added loading state
+  const navigate = useNavigate();
+
+  // Reset form when modal closes
+  useEffect(() => {
+    if (!show) {
+      setLogData({ name: "", email: "", password: "", userType: "" });
+      setErrors({});
+      setSuccessMessage("");
+    }
+  }, [show]);
+
   const logHandleChange = (e) => {
     const { name, value } = e.target;
     setLogData({ ...logData, [name]: value });
@@ -25,6 +36,13 @@ function Login({ show, handleClose }) {
     if (!logData.email.trim()) errors.email = "Email is required";
     if (!logData.password.trim()) errors.password = "Password is required";
     if (!logData.userType) errors.userType = "Please select a user type";
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (logData.email && !emailRegex.test(logData.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -34,9 +52,22 @@ function Login({ show, handleClose }) {
 
     if (!validateLog()) return;
 
+    setLoading(true); // Set loading state
+
     try {
       const response = await axios.get("http://localhost:3006/users");
       const users = response.data;
+
+      // Check if email exists at all
+      const emailExists = users.find(user => user.email === logData.email);
+      if (!emailExists) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          general: "This email ID is not registered. Please sign up."
+        }));
+        setLoading(false); // Stop loading
+        return;
+      }
 
       const matchedUser = users.find(
         (user) =>
@@ -53,23 +84,26 @@ function Login({ show, handleClose }) {
           setSuccessMessage("");
           setLogData({ name: "", email: "", password: "", userType: "" });
           handleClose();
-          if (matchedUser.userType === "Admin") {
-            navigates("/admin");
-          } else if (matchedUser.userType === "Faculty") {
-            navigates("/faculty");
-          } else {
-            navigates("/student");
+          // Handle redirection based on user type (standardizing userType to lower case for comparison)
+          const userType = matchedUser.userType.toLowerCase();
+          if (userType === "admin") {
+            navigate("/admin");
+          } else if (userType === "faculty") {
+            navigate("/faculty");
+          } else if (userType === "student") {
+            navigate("/student");
           }
         }, 1500);
       } else {
         setErrors({
-          ...errors,
-          general: "Invalid Email, password, or user type.",
+          general: "Invalid Email, password, or user type."
         });
       }
     } catch (error) {
       console.error("Login error:", error);
-      setErrors({ ...errors, general: "Server error. Try again later." });
+      setErrors({ general: "Server error. Try again later." });
+    } finally {
+      setLoading(false); // Stop loading after the request is complete
     }
   };
 
@@ -121,6 +155,7 @@ function Login({ show, handleClose }) {
               {errors.password}
             </Form.Control.Feedback>
           </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>User Type</Form.Label>
             <Form.Select
@@ -143,8 +178,8 @@ function Login({ show, handleClose }) {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" variant="primary">
-              Log In
+            <Button type="submit" variant="primary" disabled={loading}>
+              {loading ? "Logging In..." : "Log In"}
             </Button>
           </Modal.Footer>
         </Form>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Nav, Tab } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import values from '../utils/values'
+import Section from "../Section";
 
 
 
@@ -10,12 +11,12 @@ function Values() {
   const [activeTab, setActiveTab] = useState(values[0].key);
 
   return (
-    <section className="py-5 bg-light">
+    <Section className="py-5" style={{backgroundColor: 'rgb(235 235 235)'}}>
       <Container>
         <h3 className="text-center mb-5">Our Values</h3>
         <Tab.Container activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
           <Row className="d-flex">
-            <Col md={4}>
+            <Col md={3}>
               <Nav className="flex-column">
                 {values.map((val) => (
                   <Nav.Item key={val.key}>
@@ -37,7 +38,7 @@ function Values() {
                 ))}
               </Nav>
             </Col>
-            <Col md={8}>
+            <Col md={9}>
               <div
                 style={{
                   maxHeight: "300px",
@@ -67,7 +68,7 @@ function Values() {
           </Row>
         </Tab.Container>
       </Container>
-    </section>
+    </Section>
   );
 }
 

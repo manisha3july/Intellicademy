@@ -3,21 +3,19 @@
   "tagline": "Understand the Brains Behind AI",
   "description": "This Neural Networks course is designed to give you a solid foundation in how artificial neurons mimic the human brain to power modern AI systems. You'll learn to build, train, and optimize neural networks from scratch using Python and deep learning frameworks like TensorFlow and PyTorch.",
   "whatIsML": "Neural Networks are a subset of Machine Learning models inspired by the human brain. They consist of layers of interconnected nodes (neurons) that process input data and learn complex patterns. Neural networks are the foundation of many modern AI systems, including image recognition, natural language processing, and autonomous systems.",
+  "videoPoster": "/videos/nn.png",
+  "videoPath": "/videos/network.mp4",
   "whatYouWillLearn": [
     "Foundations of Neural Networks: Learn how perceptrons and multilayer networks work.",
     "Activation Functions: Understand ReLU, Sigmoid, Tanh, and how they influence learning.",
     "Forward and Backward Propagation: Dive into how data flows through the network and how errors are corrected.",
-    "Building Neural Networks with Python: Use TensorFlow and PyTorch for real-world applications.",
-    "Overfitting, Regularization, and Dropout: Techniques to improve model generalization.",
-    "Hyperparameter Tuning: Learn how to fine-tune learning rate, epochs, and batch size."
+    "Building Neural Networks with Python: Use TensorFlow and PyTorch for real-world applications."
   ],
   "courseHighlights": [
     "Understand Biological vs Artificial Neurons",
     "From Perceptrons to Deep Feedforward Networks",
     "Hands-on Implementation in TensorFlow and PyTorch",
-    "Model Training, Loss Functions & Optimizers",
-    "Use of Dropout, BatchNorm, and Early Stopping",
-    "Real-World Projects: Digit Recognition, Sentiment Analysis"
+    "Model Training, Loss Functions & Optimizers"
   ],
   "courseModules": [
     {

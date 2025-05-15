@@ -38,7 +38,6 @@ function App() {
     <AboutInfoCard />
     <AIconcepts />
     <LatestPost />
-   
     <Contact/>
     
 

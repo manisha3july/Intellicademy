@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom"; // ✅ Import useLocation
 import axios from "axios";
 import Section from "../Section";
 import DemoVideo from "./DemoVideo";
 import ModuleList from "./ModuleList";
 import "./course.css";
+import LoginModalContext from "../loginSignup/LoginModalContext"; // ✅ Import context
 
 function CoursePage() {
   const [courseData, setCourseData] = useState(null);
   const location = useLocation();
+   const { handleShow } = useContext(LoginModalContext); // ✅ Correct usage
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -48,11 +50,12 @@ function CoursePage() {
 
         <div className="row mb-5 d-flex align-items-center justify-content-center">
           <div className="col-sm-6">
-            <DemoVideo />
+            <DemoVideo videoPoster={courseData.videoPoster} videoPath={courseData.videoPath} />
           </div>
           <div className="col-sm-6">
-            <h4>What is {courseData.courseTitle.split(" ")[0]}?</h4>
+            <h4>What is {courseData.courseTitle}?</h4>
             <p>{courseData.whatIsML}</p>
+            <button style={{float:'left'}} className="btn blue_btn" onClick={handleShow}>ENROLL NOW</button>
           </div>
         </div>
 
@@ -84,8 +87,8 @@ function CoursePage() {
             </div>
           </div>
         </div>
-
-        <ModuleList courseModules={courseData.courseModules} />
+{/* 
+        <ModuleList courseModules={courseData.courseModules} /> */}
       </div>
     </Section>
   );

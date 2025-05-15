@@ -17,7 +17,7 @@ function HeroInner({ bgimage, title }) {
 
   return (
     <Section
-      className="hero_inner_container d-flex align-items-end"
+      className="hero_inner_container d-flex align-items-center"
       style={backgroundImg}
     >
       <div className="container">

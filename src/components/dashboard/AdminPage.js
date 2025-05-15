@@ -82,7 +82,7 @@ function AdminPage() {
       <div className="container">
         <div className="heading d-flex align-items-center flex-column">
           <p className="mb-0">Admin Dashboard</p>
-          <h5 style={{ fontWeight: "700", fontSize: "32px" }} className="mb-4">
+          <h5 style={{ fontWeight: "700", fontSize: "32px" }} className="mb-2">
             Welcome{" "}
             <span style={{ fontWeight: "500", color: " #6790E8" }}>
               {currentUser.name}{" "}
@@ -96,43 +96,32 @@ function AdminPage() {
           userData={selectedUser}
           refreshUsers={fetchUsersData}
         />
-
-        <div className="row d-flex align-item-center justify-content-start">
-          <div className="col-sm-6 d-flex align-item-center justify-content-center  flex-column">
-            <GraphChange chartType={chartType} setChartType={setChartType} />
-            <GraphData
-              studenTitle="Students"
-              facultyTitle="Faculties"
-              adminTitle="Admin"
-              studentCount={studentCount}
-              facultyCount={facultyCount}
-              adminCount={adminCount}
-              chartType={chartType}
-            />
-          </div>
-          <div className="col-sm-6 d-flex align-item-center justify-content-center flex-column">
-            <Signup onUserAdded={fetchUsersData} />
-          </div>
-        </div>
-        <div
-          className="p-4 mb-2 d-flex justify-content-between"
-          
-          style={{
-            backgroundColor: "#fff",
-            boxShadow: "rgba(0, 0, 0, 0.3) 0px 4px 5px 0px",
-            
-          }}
-        >
-          <SearchBox searchTerm={searchTerm} onSearchChange={setSearchTerm}/>
+        <div className="row  d-flex justify-content-center">
+          <div
+            className=" col-sm-6 p-4 mb-3 d-flex justify-content-between"
+            style={{
+              backgroundColor: "#fff",
+              boxShadow: "rgba(0, 0, 0, 0.3) 0px 4px 5px 0px",
+            }}
+          >
+            <SearchBox searchTerm={searchTerm} onSearchChange={setSearchTerm} />
             <UserTypeFilter
               userType={userTypeFilter}
               onChange={setUserTypeFilter}
             />
+          </div>
         </div>
-        <div className="p-4" style={{ backgroundColor: "#fff" }}>
+
+        <div
+          className="p-4 mb-2"
+          style={{
+            backgroundColor: "#fff",
+            boxShadow: " rgba(0, 0, 0, 0.3) 0px 4px 5px 0px",
+          }}
+        >
           <div className="row ">
             <div className="col-sm-12 ">
-              <div className="table-responsive ">
+              <div className="table-responsive " style={{}}>
                 <table
                   className="table table-bordered mb-0 table-striped"
                   style={{ backgroundColor: "#fff" }}
@@ -144,7 +133,7 @@ function AdminPage() {
 
                       <th>Number</th>
                       <th>User Type</th>
-                      <th>Update</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -180,17 +169,19 @@ function AdminPage() {
                                 >
                                   <FontAwesomeIcon icon={faUserPen} />
                                 </button>
-                                <button
-                                  className="btn btn-delete"
-                                  style={{
-                                    backgroundColor: "#f43c3c",
-                                    padding: "5px 10px",
-                                    color: "#fff",
-                                  }}
-                                  onClick={() => handleDelete(user.id)}
-                                >
-                                  <FontAwesomeIcon icon={faTrashCan} />
-                                </button>
+                                {user.id !== currentUser.id && (
+                                  <button
+                                    className="btn btn-delete"
+                                    style={{
+                                      backgroundColor: "#f43c3c",
+                                      padding: "5px 10px",
+                                      color: "#fff",
+                                    }}
+                                    onClick={() => handleDelete(user.id)}
+                                  >
+                                    <FontAwesomeIcon icon={faTrashCan} />
+                                  </button>
+                                )}
                               </div>
                             </td>
                           </tr>
@@ -206,6 +197,23 @@ function AdminPage() {
                 </table>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="row d-flex align-item-center justify-content-start">
+          <div className="col-sm-6 d-flex align-item-center justify-content-center  flex-column">
+            <GraphChange chartType={chartType} setChartType={setChartType} />
+            <GraphData
+              studenTitle="Students"
+              facultyTitle="Faculties"
+              adminTitle="Admin"
+              studentCount={studentCount}
+              facultyCount={facultyCount}
+              adminCount={adminCount}
+              chartType={chartType}
+            />
+          </div>
+          <div className="col-sm-6 d-flex align-item-center justify-content-center flex-column">
+            <Signup onUserAdded={fetchUsersData} />
           </div>
         </div>
       </div>

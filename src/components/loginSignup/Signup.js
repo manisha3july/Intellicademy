@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
-import "./signup.css"; // Import custom styles
+import React, { useState } from "react";
+import "./signup.css";
 import Section from "../Section";
 import axios from "axios";
-import AdminPage from "../dashboard/AdminPage";
 import { useNavigate, useLocation } from "react-router-dom";
 import SignupImg from "../../assets/contact-hero.png";
 
-const UserType = ["Admin", "Faculty", "Student"];
-
-const Signup = ({onUserAdded}) => {
+const Signup = ({ onUserAdded }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,7 +20,17 @@ const Signup = ({onUserAdded}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Fix: Moved here so `location` is available
   const isAdminPage = location.pathname === "/admin";
+  const isFaculty = location.pathname === "/faculty";
+
+  const getUserTypes = (isAdminPage, isFaculty) => {
+    if (isAdminPage) return ["Admin", "Faculty", "Student"];
+    if (isFaculty) return ["Student"];
+    return ["Student"];
+  };
+
+  const availableUserTypes = getUserTypes(isAdminPage, isFaculty);
 
   const fetchData = async () => {
     try {
@@ -32,23 +39,21 @@ const Signup = ({onUserAdded}) => {
         formData
       );
       alert(`Thank you, ${formData.name}! Your info has been submitted.`);
-      // Save the newly registered user in localStorage
-      localStorage.setItem("user", JSON.stringify(submitData.data));
+      // ✅ Only update session if it's a public signup
+      if (!isAdminPage && !isFaculty) {
+        localStorage.setItem("user", JSON.stringify(submitData.data));
+      }
+      if (isAdminPage || (isFaculty && typeof onUserAdded === "function")) {
+        onUserAdded();
+      }
 
-        // Only update the user list if on admin page
-        if (isAdminPage && typeof onUserAdded === "function") {
-          onUserAdded();
-        }
-
-
-      if (!isAdminPage) {
-        if (formData.userType === "Faculty") {
-          navigate("/faculty");
-        } else if (formData.userType === "Student") {
-          navigate("/student");
-        } else {
-          navigate("/admin");
-        }
+      if (!isAdminPage && !isFaculty) {
+        const redirectMap = {
+          Faculty: "/faculty",
+          Student: "/student",
+          Admin: "/admin",
+        };
+        navigate(redirectMap[formData.userType] || "/");
       }
     } catch (error) {
       alert("Data not loaded");
@@ -80,12 +85,28 @@ const Signup = ({onUserAdded}) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
+    if (!validateForm()) return;
+
+    try {
+      const response = await axios.get("http://localhost:3006/users");
+      const users = response.data;
+      const existingUser = users.find((user) => user.email === formData.email);
+
+      if (existingUser) {
+        setErrors({
+          email:
+            isAdminPage && isFaculty
+              ? "This email already exists. Please use a different email to add a new user."
+              : "This email is already registered. Please log in.",
+        });
+        return;
+      }
+
       setSubmitted(true);
-      fetchData();
+      await fetchData();
       console.log("Form Submitted", formData);
 
       setFormData({
@@ -96,288 +117,151 @@ const Signup = ({onUserAdded}) => {
         number: "",
         userType: "",
       });
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Server error. Please try again later.");
     }
   };
 
+  const renderForm = () => (
+    <div className="signup-container">
+      <div className="card signup-card">
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label">Full Name</label>
+              <input
+                type="text"
+                name="name"
+                className={`form-control ${errors.name ? "is-invalid" : ""}`}
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+              />
+              {errors.name && (
+                <div className="invalid-feedback">{errors.name}</div>
+              )}
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+              />
+              {errors.email && (
+                <div className="invalid-feedback">{errors.email}</div>
+              )}
+            </div>
+
+            <div className="row">
+              <div className="col-sm-6 mb-3">
+                <label className="form-label">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className={`form-control ${
+                    errors.password ? "is-invalid" : ""
+                  }`}
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Enter password"
+                />
+                {errors.password && (
+                  <div className="invalid-feedback">{errors.password}</div>
+                )}
+              </div>
+
+              <div className="col-sm-6 mb-3">
+                <label className="form-label">Confirm Password</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  className={`form-control ${
+                    errors.confirmPassword ? "is-invalid" : ""
+                  }`}
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm password"
+                />
+                {errors.confirmPassword && (
+                  <div className="invalid-feedback">
+                    {errors.confirmPassword}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-sm-6 mb-3">
+                <label className="form-label">Phone Number</label>
+                <input
+                  type="tel"
+                  name="number"
+                  className={`form-control ${
+                    errors.number ? "is-invalid" : ""
+                  }`}
+                  value={formData.number}
+                  onChange={handleChange}
+                  placeholder="Enter your Phone no"
+                />
+                {errors.number && (
+                  <div className="invalid-feedback">{errors.number}</div>
+                )}
+              </div>
+
+              <div className="col-sm-6 mb-3">
+                <label className="form-label">User Type</label>
+                <select
+                  name="userType"
+                  className={`form-control ${
+                    errors.userType ? "is-invalid" : ""
+                  }`}
+                  value={formData.userType}
+                  onChange={handleChange}
+                >
+                  <option disabled value="">
+                    Select User Type
+                  </option>
+                  {availableUserTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+                {errors.userType && (
+                  <div className="invalid-feedback">{errors.userType}</div>
+                )}
+              </div>
+            </div>
+
+            <div className="d-flex align-item-center justify-content-center mt-3">
+              <button type="submit" className="btn blue_btn">
+                {isAdminPage || isFaculty ? "Add User" : "Sign Up"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Section className="signup-section">
-     
-      
-          {isAdminPage ? (
-            <div className="signup-container">
-            <div className="card signup-card">
-              <div className="card-body">
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label className="form-label">Full Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      className={`form-control ${
-                        errors.name ? "is-invalid" : ""
-                      }`}
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Enter your full name"
-                    />
-                    {errors.name && (
-                      <div className="invalid-feedback">{errors.name}</div>
-                    )}
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      className={`form-control ${
-                        errors.email ? "is-invalid" : ""
-                      }`}
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Enter your email"
-                    />
-                    {errors.email && (
-                      <div className="invalid-feedback">{errors.email}</div>
-                    )}
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6 mb-3">
-                      <label className="form-label">Password</label>
-                      <input
-                        type="password"
-                        name="password"
-                        className={`form-control ${
-                          errors.password ? "is-invalid" : ""
-                        }`}
-                        value={formData.password}
-                        onChange={handleChange}
-                        placeholder="Enter password"
-                      />
-                      {errors.password && (
-                        <div className="invalid-feedback">
-                          {errors.password}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="col-sm-6 mb-3">
-                      <label className="form-label">Confirm Password</label>
-                      <input
-                        type="password"
-                        name="confirmPassword"
-                        className={`form-control ${
-                          errors.confirmPassword ? "is-invalid" : ""
-                        }`}
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        placeholder="Confirm password"
-                      />
-                      {errors.confirmPassword && (
-                        <div className="invalid-feedback">
-                          {errors.confirmPassword}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6 mb-3">
-                      <label className="form-label">Phone Number</label>
-                      <input
-                        type="number"
-                        name="number"
-                        className={`form-control ${
-                          errors.number ? "is-invalid" : ""
-                        }`}
-                        value={formData.number}
-                        onChange={handleChange}
-                        placeholder="Enter your Phone no"
-                      />
-                      {errors.number && (
-                        <div className="invalid-feedback">
-                          {errors.number}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="col-sm-6 mb-3">
-                      <label className="form-label">User Type</label>
-                      <select
-                        name="userType"
-                        className={`form-control ${
-                          errors.userType ? "is-invalid" : ""
-                        }`}
-                        value={formData.userType}
-                        onChange={handleChange}
-                      >
-                        <option value="">Select User Type</option>
-                        {UserType.map((type) => (
-                          <option key={type} value={type}>
-                            {type}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.userType && (
-                        <div className="invalid-feedback">
-                          {errors.userType}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="d-flex align-item-center justify-content-center mt-3">
-                    <button type="submit" className="btn blue_btn">
-                      Add User
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          ) : (
-           <div className="row d-flex justify-content-center align-items-center">
-             <div className="col-sm-4">
+      {isAdminPage || isFaculty ? (
+        renderForm()
+      ) : (
+        <div className="row d-flex justify-content-center align-items-center">
+          <div className="col-sm-4">
             <img src={SignupImg} className="img-fluid" alt="" />
-            </div>
-            <div className="col-sm-8">
-              <div className="signup-container">
-                <div className="card signup-card">
-                  <div className="card-body">
-                    <form onSubmit={handleSubmit}>
-                      <div className="mb-3">
-                        <label className="form-label">Full Name</label>
-                        <input
-                          type="text"
-                          name="name"
-                          className={`form-control ${
-                            errors.name ? "is-invalid" : ""
-                          }`}
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="Enter your full name"
-                        />
-                        {errors.name && (
-                          <div className="invalid-feedback">{errors.name}</div>
-                        )}
-                      </div>
-
-                      <div className="mb-3">
-                        <label className="form-label">Email Address</label>
-                        <input
-                          type="email"
-                          name="email"
-                          className={`form-control ${
-                            errors.email ? "is-invalid" : ""
-                          }`}
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="Enter your email"
-                        />
-                        {errors.email && (
-                          <div className="invalid-feedback">{errors.email}</div>
-                        )}
-                      </div>
-
-                      <div className="row">
-                        <div className="col-sm-6 mb-3">
-                          <label className="form-label">Password</label>
-                          <input
-                            type="password"
-                            name="password"
-                            className={`form-control ${
-                              errors.password ? "is-invalid" : ""
-                            }`}
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder="Enter password"
-                          />
-                          {errors.password && (
-                            <div className="invalid-feedback">
-                              {errors.password}
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="col-sm-6 mb-3">
-                          <label className="form-label">Confirm Password</label>
-                          <input
-                            type="password"
-                            name="confirmPassword"
-                            className={`form-control ${
-                              errors.confirmPassword ? "is-invalid" : ""
-                            }`}
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            placeholder="Confirm password"
-                          />
-                          {errors.confirmPassword && (
-                            <div className="invalid-feedback">
-                              {errors.confirmPassword}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="row">
-                        <div className="col-sm-6 mb-3">
-                          <label className="form-label">Phone Number</label>
-                          <input
-                            type="number"
-                            name="number"
-                            className={`form-control ${
-                              errors.number ? "is-invalid" : ""
-                            }`}
-                            value={formData.number}
-                            onChange={handleChange}
-                            placeholder="Enter your Phone no"
-                          />
-                          {errors.number && (
-                            <div className="invalid-feedback">
-                              {errors.number}
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="col-sm-6 mb-3">
-                          <label className="form-label">User Type</label>
-                          <select
-                            name="userType"
-                            className={`form-control ${
-                              errors.userType ? "is-invalid" : ""
-                            }`}
-                            value={formData.userType}
-                            onChange={handleChange}
-                          >
-                            <option value="">Select User Type</option>
-                            {UserType.map((type) => (
-                              <option key={type} value={type}>
-                                {type}
-                              </option>
-                            ))}
-                          </select>
-                          {errors.userType && (
-                            <div className="invalid-feedback">
-                              {errors.userType}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="d-flex align-item-center justify-content-center mt-3">
-                        <button type="submit" className="btn blue_btn">
-                          Sign Up
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
-          )}
-       
+          </div>
+          <div className="col-sm-8">{renderForm()}</div>
+        </div>
+      )}
     </Section>
   );
 };
