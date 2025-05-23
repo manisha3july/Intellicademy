@@ -1,8 +1,12 @@
+
+
 {
   "courseTitle": "Machine Learning",
   "tagline": "Unlock the Power of Intelligent Systems",
   "description": "This comprehensive Machine Learning course is designed to equip you with the skills needed to build smart, data-driven applications. Whether you're a beginner or a tech enthusiast looking to level up, this course provides a hands-on approach to mastering ML concepts, tools, and techniques used in the industry.",
   "whatIsML": "Machine Learning (ML) is a powerful subfield of Artificial Intelligence (AI) that gives computers the ability to learn from experience—without being explicitly programmed. In traditional programming, developers write rules that define every action a program must take. In contrast, machine learning models learn patterns from data, enabling systems to adapt, make decisions, and improve automatically as more data becomes available.",
+  "videoPoster": "/videos/ml.png",
+  "videoPath": "/videos/machine.mp4",
   "whatYouWillLearn": [
     "Understand ML Algorithms: Learn how algorithms like KNN, Naive Bayes, and SVM work under the hood.",
     "Data Preprocessing: Clean, normalize, and prepare datasets for better results.",

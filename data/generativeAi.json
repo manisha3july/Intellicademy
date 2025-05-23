@@ -3,13 +3,13 @@
   "tagline": "Create the Future with Intelligent Generative Systems",
   "description": "This Generative AI course is designed to equip learners with cutting-edge knowledge of AI models that generate content—whether text, images, audio, or code. From mastering the fundamentals of transformers to building your own generative tools, you'll gain the skills needed to work with the most exciting advancements in AI today.",
   "whatIsML": "Generative AI refers to a class of artificial intelligence models that can generate new content by learning patterns from existing data. Unlike traditional AI that classifies or predicts, generative models create—writing poems, generating images, composing music, or even coding. It's powered by advanced models like GANs, VAEs, and Transformers, including GPT, DALL·E, and Stable Diffusion.",
+  "videoPoster": "/videos/ga.png",
+  "videoPath": "/videos/genai.mp4",
   "whatYouWillLearn": [
     "Fundamentals of Generative AI: Understand how these models work and what sets them apart.",
     "Text Generation with Transformers: Use models like GPT to create human-like text.",
     "Image Generation: Learn how GANs and diffusion models generate realistic images.",
-    "Prompt Engineering: Master the skill of crafting prompts to guide model outputs.",
-    "Build Your Own Generative Apps: Use APIs like OpenAI, Stability AI, or Hugging Face.",
-    "Ethics & Risks in Generative AI: Explore safety, bias, and responsible usage."
+    "Prompt Engineering: Master the skill of crafting prompts to guide model outputs."
   ],
   "courseHighlights": [
     "Core Concepts of Generative AI",

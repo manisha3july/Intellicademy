@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/Intellicademy/static/css/main.a913a2ca.css",
-    "main.js": "/Intellicademy/static/js/main.a0bd9293.js",
+    "main.css": "/Intellicademy/static/css/main.8b5ed279.css",
+    "main.js": "/Intellicademy/static/js/main.9e6595a5.js",
     "static/js/453.3250b44c.chunk.js": "/Intellicademy/static/js/453.3250b44c.chunk.js",
     "static/media/Hero.png": "/Intellicademy/static/media/Hero.120998f3949c7c3d486e.png",
     "static/media/Ai-2.jpg": "/Intellicademy/static/media/Ai-2.521f645be0df3bc0601a.jpg",
+    "static/media/teacher.png": "/Intellicademy/static/media/teacher.56152a258d33db43d915.png",
     "static/media/Ai-3.jpg": "/Intellicademy/static/media/Ai-3.2eca7fbea163112ff68d.jpg",
     "static/media/Ai-1.jpg": "/Intellicademy/static/media/Ai-1.03205e220196326841e9.jpg",
     "static/media/blog.jpg": "/Intellicademy/static/media/blog.83e97a0c939fbd1458fc.jpg",
+    "static/media/blogHero.jpg": "/Intellicademy/static/media/blogHero.3f809f3fc8863128db77.jpg",
     "static/media/blog-hero.png": "/Intellicademy/static/media/blog-hero.4b26607f00bbce7a22b7.png",
-    "static/media/banner2.jpg": "/Intellicademy/static/media/banner2.d5acbe7c201893c6dd8a.jpg",
     "static/media/AI.jpg": "/Intellicademy/static/media/AI.c5bf62df0c93eaa3749c.jpg",
     "static/media/contact-hero.png": "/Intellicademy/static/media/contact-hero.d28ba6f1be79da3bbe1d.png",
     "static/media/Team2.jpg": "/Intellicademy/static/media/Team2.f66a9a70df1efec76a6c.jpg",
@@ -24,12 +25,12 @@
     "static/media/slick.ttf": "/Intellicademy/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/Intellicademy/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Intellicademy/index.html",
-    "main.a913a2ca.css.map": "/Intellicademy/static/css/main.a913a2ca.css.map",
-    "main.a0bd9293.js.map": "/Intellicademy/static/js/main.a0bd9293.js.map",
+    "main.8b5ed279.css.map": "/Intellicademy/static/css/main.8b5ed279.css.map",
+    "main.9e6595a5.js.map": "/Intellicademy/static/js/main.9e6595a5.js.map",
     "453.3250b44c.chunk.js.map": "/Intellicademy/static/js/453.3250b44c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a913a2ca.css",
-    "static/js/main.a0bd9293.js"
+    "static/css/main.8b5ed279.css",
+    "static/js/main.9e6595a5.js"
   ]
 }
