@@ -59,11 +59,11 @@ function Login({ show, handleClose }) {
       const users = response.data;
 
       // Check if email exists at all
-      const emailExists = users.find(user => user.email === logData.email);
+      const emailExists = users.find((user) => user.email === logData.email);
       if (!emailExists) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          general: "This email ID is not registered. Please sign up."
+          general: "This email ID is not registered. Please sign up.",
         }));
         setLoading(false); // Stop loading
         return;
@@ -96,7 +96,7 @@ function Login({ show, handleClose }) {
         }, 1500);
       } else {
         setErrors({
-          general: "Invalid Email, password, or user type."
+          general: "Invalid Email, password, or user type.",
         });
       }
     } catch (error) {
@@ -109,8 +109,16 @@ function Login({ show, handleClose }) {
 
   return (
     <Modal show={show} onHide={handleClose} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>Login</Modal.Title>
+      <Modal.Header
+        closeButton
+        className="custom-modal-header"
+        style={{ backgroundColor: "#6790e8" }}
+      >
+        <Modal.Title
+          style={{ fontWeight: "bold", fontSize: "20px", color: "#fff" }}
+        >
+          Login
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {successMessage && (
@@ -175,12 +183,12 @@ function Login({ show, handleClose }) {
           </Form.Group>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <button className="btn btn_dark" onClick={handleClose}>
               Close
-            </Button>
-            <Button type="submit" variant="primary" disabled={loading}>
+            </button>
+            <button type="submit" className="btn btn_blue" disabled={loading}>
               {loading ? "Logging In..." : "Log In"}
-            </Button>
+            </button>
           </Modal.Footer>
         </Form>
       </Modal.Body>

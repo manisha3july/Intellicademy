@@ -9,6 +9,7 @@ import AboutInfoCard from "./components/landing/AboutInfoCard.js";
 import AIconcepts from "./components/landing/AIconcepts.js";
 import LatestPost from "./components/landing/LatestPost.js";
 import Contact from "./components/landing/Contact.js";
+import ChatbaseBot from './components/ChatbaseBot.js'
 
 function App() {
 
@@ -39,8 +40,7 @@ function App() {
     <AIconcepts />
     <LatestPost />
     <Contact/>
-    
-
+      <ChatbaseBot />
     </>
   );
 }

@@ -95,3 +95,41 @@ h4 {
   border:solid 1px #6790E8;
   color:#6790E8;
 }
+
+.btn_dark {
+   border:solid 1px #ddd;
+  color:#ddd;
+}
+
+.btn_dark:hover {
+   border:solid 1px #ddd;
+  color:#ddd;
+}
+
+.btn_dark {
+  background-color: #333;
+  color: white;
+  border: none;
+  
+}
+.btn_dark:hover {
+   background-color: #333;
+  color: white;
+  border: none;
+}
+
+.btn_blue {
+  background-color: #6790e8;
+  color: white;
+  border: none;
+}
+
+.btn_blue:hover {
+   background-color: #6790e8;
+  color: white;
+  border: none;
+}
+
+.modal {
+  z-index:99999;
+}

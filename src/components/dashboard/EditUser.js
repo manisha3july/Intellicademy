@@ -1,33 +1,72 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const UserType = ["Admin", "Faculty", "Student"];
-const EditUser = ({ show, handleClose, userData, refreshUsers, onUpdateUser, currentUserType  }) => {
+const EditUser = ({
+  show,
+  handleClose,
+  userData,
+  onUpdateUser,
+  currentUserType,
+  profileImage, // Receive the profile image here
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     password: "",
     email: "",
+    userType: "",
+    number: "",
   });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null); // Track selected image
+  const [imagePreview, setImagePreview] = useState(profileImage); // Preview image
+
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const isSelf = userData?.id === currentUser?.id;
+  const isFaculty = currentUser?.userType === "Faculty";
+
+  const allowedUserTypes = isFaculty
+    ? ["Student"]
+    : ["Admin", "Faculty", "Student"];
+
   useEffect(() => {
+    // Initialize form data with user info when modal is opened
     if (userData) {
       setFormData({
         name: userData.name,
         password: userData.password,
         email: userData.email,
         userType: userData.userType,
-        number: userData.number
+        number: userData.number,
       });
     }
-  }, [userData]);
+
+    // If profileImage is passed and is different from the current preview, update imagePreview
+    if (profileImage !== imagePreview) {
+      setImagePreview(profileImage);
+    }
+  }, [userData, profileImage]); // Trigger effect when userData or profileImage changes
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" }); // Clear error on change
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setSelectedImage(file);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result); // Set the preview image to the selected file
+    };
+    reader.readAsDataURL(file); // Convert to Base64
   };
 
   const handleSubmit = async (e) => {
@@ -39,17 +78,26 @@ const EditUser = ({ show, handleClose, userData, refreshUsers, onUpdateUser, cur
 
     setLoading(true);
     try {
-      const { data: user } = await axios.put(
+      // If a new profile picture was selected, convert it to base64 and include in the formData
+      const updatedData = { ...formData, profileImage: imagePreview };
+
+      const { data: updatedUser } = await axios.put(
         `http://localhost:3006/users/${userData.id}`,
-        formData
+        updatedData
       );
+
       alert("User updated successfully!");
-      // Pass updated user back to StudentPage
-      if (typeof onUpdateUser === "function") {
-        onUpdateUser(user);
+
+      // ✅ If the edited user is the currently logged-in user, update localStorage
+      if (updatedUser.id === currentUser?.id) {
+        localStorage.setItem("user", JSON.stringify(updatedUser));
       }
+
+      if (typeof onUpdateUser === "function") {
+        onUpdateUser(updatedUser); // Send back the updated user data
+      }
+
       handleClose();
-      refreshUsers();
     } catch (error) {
       console.error("Error updating user:", error);
       alert("Failed to update user.");
@@ -59,7 +107,13 @@ const EditUser = ({ show, handleClose, userData, refreshUsers, onUpdateUser, cur
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      centered
+      backdrop={loading ? "static" : true}
+      keyboard={!loading}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Edit User</Modal.Title>
       </Modal.Header>
@@ -88,11 +142,11 @@ const EditUser = ({ show, handleClose, userData, refreshUsers, onUpdateUser, cur
               value={formData.email}
               onChange={handleChange}
               placeholder="Update your email"
-              isInvalid={!!errors.name}
+              isInvalid={!!errors.email}
               disabled={currentUserType === "Student"}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.name}
+              {errors.email}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -119,40 +173,58 @@ const EditUser = ({ show, handleClose, userData, refreshUsers, onUpdateUser, cur
               value={formData.number}
               onChange={handleChange}
               placeholder="Update your phone number"
-              isInvalid={!!errors.name}
+              isInvalid={!!errors.number}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.name}
+              {errors.number}
             </Form.Control.Feedback>
           </Form.Group>
 
-
-
-
+          {/* Profile Image Change */}
           <Form.Group className="mb-3">
-            <Form.Label>User Type</Form.Label>
-            <Form.Select
-              name="userType"
-              value={formData.userType}
-              onChange={handleChange}
-              isInvalid={!!errors.userType}
-              disabled={currentUserType === "Student"}
-            >
-              <option value="">Select User Type</option>
-              {UserType.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </Form.Select>
+            <Form.Label>Profile Picture</Form.Label>
+            <div className="d-flex justify-content-center">
+              <img
+                src={imagePreview || "https://via.placeholder.com/100"}
+                alt="Profile"
+                className="rounded-circle"
+                style={{ width: "100px", height: "100px", objectFit: "cover" }}
+              />
+            </div>
+            <input
+              type="file"
+              onChange={handleImageChange}
+              className="form-control mt-2"
+            />
           </Form.Group>
+
+          {!isSelf && (
+            <Form.Group className="mb-3">
+              <Form.Label>User Type</Form.Label>
+              <Form.Select
+                name="userType"
+                value={formData.userType}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Type</option>
+                {allowedUserTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+          )}
+
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <button className="btn btn_dark" onClick={handleClose}>
               Close
-            </Button>
-            <Button type="submit" variant="primary">
-              Save
-            </Button>
+            </button>
+            <button  type="submit" className="btn btn_blue"  disabled={loading}>
+              {loading ? "Saving..." : "Save"}
+            </button>
+            {/* <Button variant="primary"></Button> */}
           </Modal.Footer>
         </Form>
       </Modal.Body>

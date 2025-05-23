@@ -96,6 +96,7 @@ function AdminPage() {
           userData={selectedUser}
           refreshUsers={fetchUsersData}
         />
+
         <div className="row  d-flex justify-content-center">
           <div
             className=" col-sm-6 p-4 mb-3 d-flex justify-content-between"

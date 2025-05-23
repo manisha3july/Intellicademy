@@ -17,7 +17,7 @@ import FacultyPage from "./components/dashboard/FacultyPage";
 import StudentPage from "./components/dashboard/StudentPage";
 import CoursePage from "./components/courses/CoursePage";
 import ContactPage from "./components/ContactPage";
-
+import ProfilePage from "./components/dashboard/ProfilePage";
 import reportWebVitals from "./reportWebVitals";
 
 // Font Awesome
@@ -37,15 +37,19 @@ root.render(
           <Route path="blog" element={<Blog />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="signup" element={<Signup />} />
-         
+
           <Route path="courses" element={<CoursePage />} />
-           <Route path="/admin" element={<AdminPage />} />
-            <Route path="/faculty" element={<FacultyPage />} />
+
+          {/* User Dashboard Routes */}
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/profile" element={<ProfilePage />} />
+          <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/student" element={<StudentPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
-       
+
         {/* Dashboard routes - no Layout */}
-       
+        {/* Other routes could go here if needed */}
       </Routes>
     </Router>
   </React.StrictMode>

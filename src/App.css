@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+/* You can add this to your App.css or create a new CSS file */
+#chatbase-script {
+  display: block !important;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  z-index: 9999;
+}
+
+#chatbase-button {
+  display: block !important;
+  z-index: 9999 !important;
+}
